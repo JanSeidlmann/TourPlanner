@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="230.0" layoutY="-9.0" prefHeight="45.0" prefWidth="140.0" text="Tour Planner">
@@ -64,7 +63,5 @@
       </ButtonBar>
       <TextField layoutX="384.0" layoutY="33.0" promptText="Search" />
       <Button layoutX="534.0" layoutY="33.0" mnemonicParsing="false" text="Search" />
-      <Button layoutX="550.0" layoutY="2.0" mnemonicParsing="false" text="Exit" />
-      <Button layoutX="514.0" layoutY="2.0" mnemonicParsing="false" text="Min" />
    </children>
 </Pane>
