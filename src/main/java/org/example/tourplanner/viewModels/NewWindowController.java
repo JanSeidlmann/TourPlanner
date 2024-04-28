@@ -1,6 +1,5 @@
 package org.example.tourplanner.viewModels;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +29,7 @@ public class NewWindowController implements Initializable {
     }
 
     @FXML
-    private void closeWindow(ActionEvent event) {
+    private void closeWindow() {
         newStage.close();
     }
 
