@@ -1,10 +1,12 @@
-package org.example.tourplanner.View;
+package org.example.tourplanner.viewModels;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,9 +20,23 @@ public class NewWindowController implements Initializable {
     @FXML
     private Label labelNewWindow;
 
+    @FXML
+    private ChoiceBox<String> transportType;
+
+    private Stage newStage;
+
+    public void setStage(Stage stage) {
+        this.newStage = stage;
+    }
+
+    @FXML
+    private void closeWindow(ActionEvent event) {
+        newStage.close();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        transportType.getItems().addAll("Car", "Bike", "Walk");
     }
 
     protected void show(Stage currentStage) throws IOException {
@@ -28,15 +44,16 @@ public class NewWindowController implements Initializable {
         fl.setLocation(NewWindowController.class.getResource("/org/example/tourplanner/newWindow.fxml"));
         fl.load();
         Parent root = fl.getRoot();
-        Stage newStage = new Stage();
+        newStage = new Stage();
         newStage.initOwner(currentStage);
         newStage.initModality(Modality.APPLICATION_MODAL);
         newStage.setResizable(false);
-        Scene scene = new Scene(root, 500, 300 );
+        Scene scene = new Scene(root, 565, 400 );
         newStage.setScene(scene);
-        newStage.setTitle("Application Modality");
+        newStage.setTitle("Create Tour");
         newStage.show();
-        ((NewWindowController) fl.getController()).labelNewWindow.setText("Application Modality");
+        ((NewWindowController) fl.getController()).labelNewWindow.setText("Create Tour");
+        ((NewWindowController) fl.getController()).setStage(newStage);
     }
 }
 

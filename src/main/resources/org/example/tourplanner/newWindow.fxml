@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.View.NewWindowController">
-   <children>
-      <Label fx:id="labelNewWindow" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="18.0" prefHeight="45.8" prefWidth="79.39999999999999" text="TEST" textAlignment="JUSTIFY" wrapText="true" AnchorPane.bottomAnchor="-8.400000000000013" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.599999999999994" AnchorPane.topAnchor="18.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <CheckBox layoutX="21.0" layoutY="15.0" mnemonicParsing="false" text="CheckBox" />
-   </children>
+<AnchorPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.viewModels.NewWindowController">
    <styleClass>
       <String fx:value="button" />
       <String fx:value="pane" />
    </styleClass>
+   <children>
+      <Label fx:id="labelNewWindow" layoutX="223.0" prefHeight="45.0" prefWidth="140.0" text="Create Tour">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="70.0" text="Name:" />
+      <TextField layoutX="66.0" layoutY="66.0" prefHeight="25.0" prefWidth="467.0" />
+      <Label layoutX="28.0" layoutY="100.0" text="Description:" />
+      <TextField layoutX="94.0" layoutY="96.0" prefHeight="59.0" prefWidth="440.0" />
+      <Label layoutX="28.0" layoutY="164.0" text="From:" />
+      <TextField layoutX="140.0" layoutY="310.0" prefHeight="25.0" prefWidth="392.0" />
+      <Label layoutX="28.0" layoutY="194.0" text="To:" />
+      <TextField layoutX="66.0" layoutY="280.0" prefHeight="25.0" prefWidth="467.0" />
+      <Label layoutX="28.0" layoutY="254.0" text="Distance:" />
+      <TextField layoutX="84.0" layoutY="250.0" prefHeight="25.0" prefWidth="448.0" />
+      <Label layoutX="28.0" layoutY="284.0" text="Time:" />
+      <TextField layoutX="52.0" layoutY="190.0" prefHeight="25.0" prefWidth="481.0" />
+      <Label layoutX="28.0" layoutY="314.0" text="Route Informations:" />
+      <TextField layoutX="66.0" layoutY="160.0" prefHeight="25.0" prefWidth="467.0" />
+      <Label layoutX="28.0" layoutY="224.0" text="Transport:" />
+      <ChoiceBox fx:id="transportType" layoutX="91.0" layoutY="220.0" prefWidth="150.0" />
+      <Button layoutX="483.0" layoutY="361.0" mnemonicParsing="false" text="Create" />
+      <Button layoutX="424.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+
+   </children>
 </AnchorPane>

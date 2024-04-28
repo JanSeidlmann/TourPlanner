@@ -1,4 +1,4 @@
-package org.example.tourplanner.View;
+package org.example.tourplanner.viewModels;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

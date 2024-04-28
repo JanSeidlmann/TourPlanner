@@ -1,25 +1,29 @@
-package org.example.tourplanner.Models;
+package org.example.tourplanner.models;
 
 public class TourModel {
-    // name, tour description, from, to, transport type, tour distance,
-    //estimated time, route information
-    private final String name;
-    private final String tourDescription;
-    private final String from;
-    private final String to;
+    private String name;
+    private String tourDescription;
+    private String from;
+    private String to;
+    private TransportType transportType;
+    private float distance;
+    private String time;
+    private String routeInformation;
 
-    // maybe make into an enum
-    private final String transportType;
-    private final float distance;
-    private final String time;
-    private final String routeInformation;
+
+enum TransportType {
+    CAR,
+    BIKE,
+    WALK,
+
+}
 
     public TourModel(String name, String tourDescription, String from, String to, String transportType, float distance, String time, String routeInformation) {
         this.name = name;
         this.tourDescription = tourDescription;
         this.from = from;
         this.to = to;
-        this.transportType = transportType;
+        this.transportType = TransportType.valueOf(transportType);
         this.distance = distance;
         this.time = time;
         this.routeInformation = routeInformation;
