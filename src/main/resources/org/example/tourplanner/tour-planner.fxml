@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.View.TourPlannerController">
    <children>
       <Label layoutX="230.0" layoutY="-9.0" prefHeight="45.0" prefWidth="140.0" text="Tour Planner">
          <font>
@@ -24,7 +24,7 @@
           <TableColumn prefWidth="150.0" text="Tours" />
         </columns>
       </TableView>
-      <Button layoutX="14.0" layoutY="72.0" mnemonicParsing="false" text="+" />
+      <Button layoutX="14.0" layoutY="72.0" mnemonicParsing="false" text="+" onAction="#openApplicationModalWindow" />
       <Button layoutX="38.0" layoutY="72.0" mnemonicParsing="false" text="-" />
       <Button layoutX="59.0" layoutY="72.0" mnemonicParsing="false" text="..." />
       <Label layoutX="170.0" layoutY="219.0" text="Tour Logs">
@@ -39,7 +39,7 @@
             <TableColumn prefWidth="137.60003662109375" text="Distance" />
         </columns>
       </TableView>
-      <Button layoutX="511.0" layoutY="212.0" mnemonicParsing="false" text="+" />
+      <Button layoutX="511.0" layoutY="212.0" mnemonicParsing="false" text="+" onAction="#openApplicationModalWindow"/>
       <Button layoutX="535.0" layoutY="212.0" mnemonicParsing="false" text="-" />
       <Button layoutX="556.0" layoutY="212.0" mnemonicParsing="false" text="..." />
       <TabPane layoutX="166.0" layoutY="72.0" prefHeight="134.0" prefWidth="410.0" tabClosingPolicy="UNAVAILABLE">
