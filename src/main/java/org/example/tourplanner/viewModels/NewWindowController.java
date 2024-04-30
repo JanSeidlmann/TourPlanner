@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -15,6 +16,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NewWindowController implements Initializable {
+    @FXML
+    public TextField nameTextField;
 
     @FXML
     private Label labelNewWindow;
@@ -33,9 +36,29 @@ public class NewWindowController implements Initializable {
         newStage.close();
     }
 
+    public interface AddTourCallback {
+        void addTour(String tourName);
+    }
+
+    private AddTourCallback callback;
+
+
+    public void setCallback(AddTourCallback callback) {
+        this.callback = callback;
+    }
+
+    public void addTour() {
+        String name = nameTextField.getText().trim();
+        if (!name.isEmpty() && callback != null) {
+            callback.addTour(name);
+            nameTextField.clear();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         transportType.getItems().addAll("Car", "Bike", "Walk");
+        CreateViewModel createViewModel = new CreateViewModel();
     }
 
     protected void show(Stage currentStage) throws IOException {
@@ -53,6 +76,7 @@ public class NewWindowController implements Initializable {
         newStage.show();
         ((NewWindowController) fl.getController()).labelNewWindow.setText("Create Tour");
         ((NewWindowController) fl.getController()).setStage(newStage);
+        ((NewWindowController) fl.getController()).setCallback(callback);
     }
 }
 

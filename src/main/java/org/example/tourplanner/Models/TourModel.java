@@ -1,5 +1,8 @@
 package org.example.tourplanner.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class TourModel {
     private String name;
     private String tourDescription;
@@ -11,14 +14,28 @@ public class TourModel {
     private String routeInformation;
 
 
-enum TransportType {
-    CAR,
-    BIKE,
-    WALK,
+    enum TransportType {
+        CAR,
+        BIKE,
+        WALK,
 
-}
+    }
 
-    public TourModel(String name, String tourDescription, String from, String to, String transportType, float distance, String time, String routeInformation) {
+    private final ObservableList<String> tourList;
+
+    public TourModel() {
+        tourList = FXCollections.observableArrayList();
+    }
+
+    public ObservableList<String> getTourList() {
+        return tourList;
+    }
+
+    public void addTour(String person) {
+        tourList.add(person);
+    }
+
+/*    public TourModel(String name, String tourDescription, String from, String to, String transportType, float distance, String time, String routeInformation) {
         this.name = name;
         this.tourDescription = tourDescription;
         this.from = from;
@@ -27,8 +44,6 @@ enum TransportType {
         this.distance = distance;
         this.time = time;
         this.routeInformation = routeInformation;
-    }
-
-
+    }*/
 
 }
