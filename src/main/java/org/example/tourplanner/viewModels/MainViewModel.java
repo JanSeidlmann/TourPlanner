@@ -30,8 +30,4 @@ public class MainViewModel {
     public void addTourName(String tourName) {
         tourNames.add(tourName);
     }
-
-    public void removeTour(TourModel tour) {
-        tours.remove(tour);
-    }
 }

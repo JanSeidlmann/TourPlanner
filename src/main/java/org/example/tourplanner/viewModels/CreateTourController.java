@@ -74,11 +74,5 @@ public class CreateTourController implements Initializable {
         Stage stage = (Stage) createButton.getScene().getWindow();  // Hole die Stage über den Save-Button
         stage.close();  // Schließe die Stage
     }
-
-/*    @FXML
-    private void removeTour() {
-        ObservableList<TourModel> selectedItems = tourPlannerController.tourListView.getSelectionModel().getSelectedItems();
-        viewModel.getTours().removeAll(selectedItems);
-    }*/
 }
 
