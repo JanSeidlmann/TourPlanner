@@ -1,16 +1,17 @@
 package org.example.tourplanner.viewModels;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.tourplanner.TourPlannerApplication;
+import org.example.tourplanner.models.TourModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +35,12 @@ public class TourPlannerController implements Initializable {
         stage.setTitle("Add New Tour");
         stage.setScene(new Scene(root));
         stage.showAndWait(); // Zeigt das Fenster und wartet, bis es geschlossen wird
+    }
+
+    @FXML
+    private void removeTour() {
+        ObservableList<String> selectedItems = tourListView.getSelectionModel().getSelectedItems();
+        viewModel.getTourNames().removeAll(selectedItems);
     }
 
     @Override
