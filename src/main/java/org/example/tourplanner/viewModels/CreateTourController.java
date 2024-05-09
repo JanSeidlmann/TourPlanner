@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 import org.example.tourplanner.models.TourModel;
 
 import java.io.IOException;
@@ -22,25 +23,25 @@ public class CreateTourController implements Initializable {
     private Button createButton;
 
     @FXML
-    private TextField descriptionNameField;
+    private TextField descriptionTextField;
 
     @FXML
-    private TextField distanceNameField;
+    private TextField distanceTextField;
 
     @FXML
-    private TextField fromNameField;
+    private TextField fromTextField;
 
     @FXML
     private TextField nameTextField;
 
     @FXML
-    private TextField routeInformationNameField;
+    private TextField routeInformationTextField;
 
     @FXML
-    private TextField timeNameField;
+    private TextField timeTextField;
 
     @FXML
-    private TextField toNameField;
+    private TextField toTextField;
 
     @FXML
     private ChoiceBox<String> transportType;
@@ -54,14 +55,31 @@ public class CreateTourController implements Initializable {
 
         TourModel newTour = new TourModel();
         nameTextField.textProperty().bindBidirectional(newTour.getName());
+        descriptionTextField.textProperty().bindBidirectional(newTour.getTourDescription());
+        fromTextField.textProperty().bindBidirectional(newTour.getFrom());
+        toTextField.textProperty().bindBidirectional(newTour.getTo());
         transportType.valueProperty().bindBidirectional(newTour.getTransportType());
-
+        distanceTextField.textProperty().bindBidirectional(newTour.getDistance(), new NumberStringConverter());
+        timeTextField.textProperty().bindBidirectional(newTour.getTime());
+        routeInformationTextField.textProperty().bindBidirectional(newTour.getRouteInformation());
     }
 
     @FXML
     private void onCreateButtonClicked() {
         String tourName = nameTextField.getText();
+        float distance = Float.parseFloat(distanceTextField.getText());
+        TourModel tour = new TourModel(
+                nameTextField.getText(),
+                descriptionTextField.getText(),
+                fromTextField.getText(),
+                toTextField.getText(),
+                transportType.getSelectionModel().getSelectedItem(),
+                distance,
+                timeTextField.getText(),
+                routeInformationTextField.getText()
+        );
         viewModel.addTourName(tourName);
+        viewModel.addTour(tour);
         closeStage();
     }
 

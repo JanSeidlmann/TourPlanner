@@ -22,17 +22,17 @@
       <Label layoutX="28.0" layoutY="70.0" text="Name:" />
       <TextField fx:id="nameTextField" layoutX="66.0" layoutY="66.0" prefHeight="25.0" prefWidth="467.0" />
       <Label layoutX="28.0" layoutY="100.0" text="Description:" />
-      <TextField fx:id="descriptionNameField" layoutX="94.0" layoutY="96.0" prefHeight="59.0" prefWidth="440.0" />
+      <TextField fx:id="descriptionTextField" layoutX="94.0" layoutY="96.0" prefHeight="59.0" prefWidth="440.0" />
       <Label layoutX="28.0" layoutY="164.0" text="From:" />
-      <TextField fx:id="routeInformationNameField" layoutX="140.0" layoutY="310.0" prefHeight="25.0" prefWidth="392.0" />
+      <TextField fx:id="routeInformationTextField" layoutX="140.0" layoutY="310.0" prefHeight="25.0" prefWidth="392.0" />
       <Label layoutX="28.0" layoutY="194.0" text="To:" />
-      <TextField fx:id="timeNameField" layoutX="66.0" layoutY="280.0" prefHeight="25.0" prefWidth="467.0" />
+      <TextField fx:id="timeTextField" layoutX="66.0" layoutY="280.0" prefHeight="25.0" prefWidth="467.0" />
       <Label layoutX="28.0" layoutY="254.0" text="Distance:" />
-      <TextField fx:id="distanceNameField" layoutX="84.0" layoutY="250.0" prefHeight="25.0" prefWidth="448.0" />
+      <TextField fx:id="distanceTextField" layoutX="84.0" layoutY="250.0" prefHeight="25.0" prefWidth="448.0" />
       <Label layoutX="28.0" layoutY="284.0" text="Time:" />
-      <TextField fx:id="toNameField" layoutX="52.0" layoutY="190.0" prefHeight="25.0" prefWidth="481.0" />
+      <TextField fx:id="toTextField" layoutX="52.0" layoutY="190.0" prefHeight="25.0" prefWidth="481.0" />
       <Label layoutX="28.0" layoutY="314.0" text="Route Informations:" />
-      <TextField fx:id="fromNameField" layoutX="66.0" layoutY="160.0" prefHeight="25.0" prefWidth="467.0" />
+      <TextField fx:id="fromTextField" layoutX="66.0" layoutY="160.0" prefHeight="25.0" prefWidth="467.0" />
       <Label layoutX="28.0" layoutY="224.0" text="Transport:" />
       <ChoiceBox fx:id="transportType" layoutX="91.0" layoutY="220.0" prefWidth="150.0" />
       <Button fx:id="createButton" layoutX="483.0" layoutY="361.0" mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Create" />
