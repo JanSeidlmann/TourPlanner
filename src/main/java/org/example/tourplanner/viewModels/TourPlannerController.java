@@ -1,26 +1,94 @@
 package org.example.tourplanner.viewModels;
 
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.tourplanner.TourPlannerApplication;
+import org.example.tourplanner.models.TourModel;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class TourPlannerController {
+public class TourPlannerController implements Initializable {
 
     @FXML
-    static NewWindowController newWindowController = new NewWindowController();
+    public ListView<String> tourListView;
 
     @FXML
-    protected void openApplicationModalWindow(ActionEvent event) throws IOException {
-        Stage currentStage = getRoot(event);
-        newWindowController.show(currentStage);
+    public TableView<TourModel> tourTableView;
+
+    @FXML
+    private TableColumn<TourModel, String> nameColumn;
+
+    @FXML
+    private TableColumn<TourModel, String> descriptionColumn;
+
+    @FXML
+    private TableColumn<TourModel, String> fromColumn;
+
+    @FXML
+    private TableColumn<TourModel, String> toColumn;
+
+    @FXML
+    private TableColumn<TourModel, String> transportTypeColumn;
+
+    @FXML
+    private TableColumn<TourModel, Float> distanceColumn;
+
+    @FXML
+    private TableColumn<TourModel, String> timeColumn;
+
+    @FXML
+    private TableColumn<TourModel, String> routeInformationColumn;
+
+    private MainViewModel viewModel;
+
+    @FXML
+    protected void createTour(ActionEvent event) throws IOException {
+        // Verwende den ClassLoader, der die MainApp geladen hat, um die Ressource zu bekommen
+        FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/createTour.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL); // Macht das Fenster modal
+        stage.setTitle("Add New Tour");
+        stage.setScene(new Scene(root));
+        stage.showAndWait(); // Zeigt das Fenster und wartet, bis es geschlossen wird
     }
 
-    private static Stage getRoot(ActionEvent event){
-        Node root = (Node) event.getSource();
-        return (Stage) root.getScene().getWindow();
+    @FXML
+    private void removeTour() {
+        ObservableList<String> selectedName = tourListView.getSelectionModel().getSelectedItems();
+        ObservableList<TourModel> selectedItems = tourTableView.getSelectionModel().getSelectedItems();
+        viewModel.getTourNames().removeAll(selectedName);
+        viewModel.getTours().removeAll(selectedItems);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        viewModel = MainViewModel.getInstance();
+        nameColumn.setCellValueFactory(data -> data.getValue().getName());
+        descriptionColumn.setCellValueFactory(data -> data.getValue().getTourDescription());
+        fromColumn.setCellValueFactory(data -> data.getValue().getFrom());
+        toColumn.setCellValueFactory(data -> data.getValue().getTo());
+        transportTypeColumn.setCellValueFactory(data -> data.getValue().getTransportType());
+        distanceColumn.setCellValueFactory(data -> data.getValue().getDistance().asObject());
+        timeColumn.setCellValueFactory(data -> data.getValue().getTime());
+        routeInformationColumn.setCellValueFactory(data -> data.getValue().getRouteInformation());
+
+        tourListView.setItems(viewModel.getTourNames());
+        tourTableView.setItems(viewModel.getTours());
+    }
 }
