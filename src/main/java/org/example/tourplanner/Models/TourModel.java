@@ -25,11 +25,14 @@ public class TourModel {
     public TourModel() {}
 
     // Konstruktor mit allen Parametern
-    public TourModel(String name, String description, String from, String to, String transportType) {
+    public TourModel(String name, String description, String from, String to, String transportType, Float distance, String time, String routeInformation) {
         this.name.set(name);
         this.tourDescription.set(description);
         this.from.set(from);
         this.to.set(to);
         this.transportType.set(transportType);
+        this.distance.set(distance);
+        this.time.set(time);
+        this.routeInformation.set(routeInformation);
     }
 }

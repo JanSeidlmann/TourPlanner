@@ -65,7 +65,7 @@
                     <buttons>
                         <Button mnemonicParsing="false" onAction="#createTour" text="+" />
                         <Button mnemonicParsing="false" onAction="#removeTour" text="-" />
-                        <Button mnemonicParsing="false" text="..." />
+                        <Button mnemonicParsing="false" onAction="#editTour" text="..." />
                     </buttons>
                   </ButtonBar>
                   <ListView fx:id="tourListView" prefHeight="520.0" prefWidth="212.0" />

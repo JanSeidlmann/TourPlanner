@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -64,6 +65,19 @@ public class TourPlannerController implements Initializable {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL); // Macht das Fenster modal
         stage.setTitle("Add New Tour");
+        stage.setScene(new Scene(root));
+        stage.showAndWait(); // Zeigt das Fenster und wartet, bis es geschlossen wird
+    }
+
+    @FXML
+    protected void editTour(ActionEvent event) throws IOException {
+        // Verwende den ClassLoader, der die MainApp geladen hat, um die Ressource zu bekommen
+        FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/editTour.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL); // Macht das Fenster modal
+        stage.setTitle("Edit Tour");
         stage.setScene(new Scene(root));
         stage.showAndWait(); // Zeigt das Fenster und wartet, bis es geschlossen wird
     }
