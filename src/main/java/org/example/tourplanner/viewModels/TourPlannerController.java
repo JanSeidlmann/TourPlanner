@@ -71,15 +71,26 @@ public class TourPlannerController implements Initializable {
 
     @FXML
     protected void editTour(ActionEvent event) throws IOException {
-        // Verwende den ClassLoader, der die MainApp geladen hat, um die Ressource zu bekommen
-        FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/editTour.fxml"));
-        Parent root = fxmlLoader.load();
+        TourModel selectedTour = tourTableView.getSelectionModel().getSelectedItem();
+        if (selectedTour != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/editTour.fxml"));
+            Parent root = fxmlLoader.load();
 
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL); // Macht das Fenster modal
-        stage.setTitle("Edit Tour");
-        stage.setScene(new Scene(root));
-        stage.showAndWait(); // Zeigt das Fenster und wartet, bis es geschlossen wird
+            EditTourController editTourController = fxmlLoader.getController();
+            editTourController.setTourModel(selectedTour);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit Tour");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a tour to edit.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

@@ -19,12 +19,8 @@ public class TourModel {
     private StringProperty time = new SimpleStringProperty();;
     private StringProperty routeInformation = new SimpleStringProperty();;
 
-
-
-    // Standardkonstruktor
     public TourModel() {}
 
-    // Konstruktor mit allen Parametern
     public TourModel(String name, String description, String from, String to, String transportType, Float distance, String time, String routeInformation) {
         this.name.set(name);
         this.tourDescription.set(description);
