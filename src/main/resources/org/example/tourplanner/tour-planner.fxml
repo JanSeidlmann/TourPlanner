@@ -63,8 +63,8 @@
                <children>
                   <ButtonBar buttonMinWidth="30.0">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#createTour" text="+" />
-                        <Button mnemonicParsing="false" onAction="#removeTour" text="-" />
+                        <Button fx:id="addTourButton" mnemonicParsing="false" onAction="#createTour" text="+" />
+                        <Button fx:id="deleteTourButton" mnemonicParsing="false" onAction="#removeTour" text="-" />
                         <Button mnemonicParsing="false" onAction="#editTour" text="..." />
                     </buttons>
                   </ButtonBar>
