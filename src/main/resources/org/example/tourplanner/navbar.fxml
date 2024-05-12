@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxWidth="1800.0" minHeight="50.0" minWidth="600.0" prefHeight="80.0" prefWidth="1800.0"
+            style="-fx-background-color: black" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.tourplanner.viewModels.NavbarController">
+   <HBox prefHeight="80.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <TextField promptText="Search" />
+         <Button mnemonicParsing="false" text="Search" />
+         <Button mnemonicParsing="false" text="Tours/Logs" />
+         <Button mnemonicParsing="false" text="Menu" />
+      </children>
+   </HBox>
+
+</AnchorPane>

@@ -1,6 +1,5 @@
 package org.example.tourplanner.viewModels;
 
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,21 +10,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.tourplanner.TourPlannerApplication;
 import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.viewModels.MainViewModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TourPlannerController implements Initializable {
+public class AllToursController implements Initializable {
 
+    /*
     @FXML
     public ListView<String> tourListView;
 
+     */
     @FXML
     public TableView<TourModel> tourTableView;
 
@@ -70,9 +71,9 @@ public class TourPlannerController implements Initializable {
 
     @FXML
     private void removeTour() {
-        ObservableList<String> selectedName = tourListView.getSelectionModel().getSelectedItems();
+        //ObservableList<String> selectedName = tourListView.getSelectionModel().getSelectedItems();
         ObservableList<TourModel> selectedItems = tourTableView.getSelectionModel().getSelectedItems();
-        viewModel.getTourNames().removeAll(selectedName);
+        //viewModel.getTourNames().removeAll(selectedName);
         viewModel.getTours().removeAll(selectedItems);
     }
 
@@ -88,7 +89,7 @@ public class TourPlannerController implements Initializable {
         timeColumn.setCellValueFactory(data -> data.getValue().getTime());
         routeInformationColumn.setCellValueFactory(data -> data.getValue().getRouteInformation());
 
-        tourListView.setItems(viewModel.getTourNames());
+        //tourListView.setItems(viewModel.getTourNames());
         tourTableView.setItems(viewModel.getTours());
     }
 }

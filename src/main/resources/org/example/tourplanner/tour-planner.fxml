@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.viewModels.TourPlannerController">
+<GridPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.viewModels.AllToursController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="362.20001220703125" minWidth="10.0" prefWidth="211.20001220703125" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.19996643066406" minWidth="10.0" prefWidth="423.1999877929687" />
@@ -76,34 +76,7 @@
       <AnchorPane GridPane.columnIndex="1" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <TabPane prefHeight="379.2" prefWidth="482.4" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <tabs>
-                <Tab text="General">
-                     <content>
-                        <TableView fx:id="tourTableView" prefHeight="200.0" prefWidth="200.0">
-                          <columns>
-                            <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                            <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
-                              <TableColumn fx:id="fromColumn" prefWidth="75.0" text="From" />
-                              <TableColumn fx:id="toColumn" prefWidth="75.0" text="To" />
-                              <TableColumn fx:id="transportTypeColumn" prefWidth="75.0" text="Transport" />
-                              <TableColumn fx:id="distanceColumn" prefWidth="75.0" text="Distance" />
-                              <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />
-                              <TableColumn fx:id="routeInformationColumn" prefWidth="75.0" text="Route Informations" />
-                          </columns>
-                        </TableView>
-                     </content></Tab>
-                <Tab text="Route">
-                     <content>
-                        <ImageView fitHeight="108.0" fitWidth="408.0" pickOnBounds="true" preserveRatio="true" />
-                     </content>
-                  </Tab>
-                  <Tab text="Misc" />
-              </tabs>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </TabPane>
+
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
