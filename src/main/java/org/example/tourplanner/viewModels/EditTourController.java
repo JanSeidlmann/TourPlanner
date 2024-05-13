@@ -69,14 +69,14 @@ public class EditTourController implements Initializable {
         if (tourModel != null) {
             String oldName = tourModel.getName().get();
 
-            String name = editNameTextField.getText().trim();
-            String description = editDescriptionTextField.getText().trim();
-            String from = editFromTextField.getText().trim();
-            String to = editToTextField.getText().trim();
-            String time = editTimeTextField.getText().trim();
-            String distanceText = editDistanceTextField.getText().trim();
+            String name = editNameTextField.getText();
+            String description = editDescriptionTextField.getText();
+            String from = editFromTextField.getText();
+            String to = editToTextField.getText();
+            String time = editTimeTextField.getText();
+            String distanceText = editDistanceTextField.getText();
             String transportType = editTransportType.getValue();
-            String routeInformation = editRouteInformationTextField.getText().trim();
+            String routeInformation = editRouteInformationTextField.getText();
 
             if (name.isEmpty() || distanceText.isEmpty()) {
                 showAlert("Name and Distance are required.");

@@ -13,6 +13,8 @@ import org.example.tourplanner.models.TourModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static javafx.beans.binding.Bindings.isEmpty;
+
 public class CreateTourController implements Initializable {
 
     @FXML
@@ -62,15 +64,19 @@ public class CreateTourController implements Initializable {
 
     @FXML
     private void onCreateButtonClicked() {
-        String tourName = nameTextField.getText().trim();
-        String distanceText = distanceTextField.getText().trim();
+        String tourName;
+        String distanceText;
 
-        if (tourName.isEmpty() || distanceText.isEmpty()) {
+        if (nameTextField.getText() == null || nameTextField.getText().isEmpty() || distanceTextField.getText().isEmpty()) {
             showAlert("Name and Distance are required.");
             return;
+        } else {
+            tourName = nameTextField.getText();
+            distanceText = distanceTextField.getText();
         }
 
         float distance;
+
         try {
             distance = Float.parseFloat(distanceText);
         } catch (NumberFormatException e) {
