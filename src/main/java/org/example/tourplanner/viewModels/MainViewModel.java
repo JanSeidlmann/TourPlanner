@@ -3,7 +3,7 @@ package org.example.tourplanner.viewModels;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.Models.TourModel;
 
 @Getter
 public class MainViewModel {

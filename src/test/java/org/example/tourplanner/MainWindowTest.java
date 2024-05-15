@@ -1,7 +1,7 @@
 package org.example.tourplanner;
 
 import javafx.stage.Stage;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.Models.TourModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
-import static org.testfx.util.NodeQueryUtils.hasText;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class MainWindowTest extends ApplicationTest {
@@ -64,31 +63,4 @@ public class MainWindowTest extends ApplicationTest {
         assertEquals("Time", tour.getTime().get());
         assertEquals("RouteInformation", tour.getRouteInformation().get());
     }
-
-    /*@Test
-    void testEditTour() {
-        // Add a tour
-        clickOn("#addTourButton");
-        clickOn("#nameTextField").write("Tour 1");
-        clickOn("#descriptionTextField").write("Description");
-        clickOn("#fromTextField").write("From");
-        clickOn("#toTextField").write("To");
-        clickOn("#editTransportType").clickOn("Car");
-        clickOn("#distanceTextField").write("10.5");
-        clickOn("#timeTextField").write("10:00");
-        clickOn("#routeInformationTextField").write("Route Information");
-        clickOn("#createButton");
-
-        // Edit the tour
-        clickOn("#tourTableView");
-        clickOn("Tour 1");
-        clickOn("#editButton");
-        clickOn("#editNameTextField").write("Edited Tour 1");
-        clickOn("#editButton");
-
-        // Verify that the tour has been edited
-        assertTrue(lookup("#tourTableView").queryTableView().getItems().stream()
-                .anyMatch(item -> item.getName().equals("Edited Tour 1")));
-    }*/
-
 }

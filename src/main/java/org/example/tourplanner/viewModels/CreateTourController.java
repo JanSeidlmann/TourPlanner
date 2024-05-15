@@ -8,7 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.Models.TourModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;

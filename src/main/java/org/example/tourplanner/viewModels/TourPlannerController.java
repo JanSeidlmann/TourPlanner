@@ -1,6 +1,5 @@
 package org.example.tourplanner.viewModels;
 
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,11 +11,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.tourplanner.Models.TourModel;
 import org.example.tourplanner.TourPlannerApplication;
-import org.example.tourplanner.models.TourModel;
 
 import java.io.IOException;
 import java.net.URL;
