@@ -1,21 +1,19 @@
 package org.example.tourplanner.viewModels;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.Models.TourModel;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static javafx.beans.binding.Bindings.isEmpty;
 
 public class CreateTourController implements Initializable {
 
@@ -66,10 +64,28 @@ public class CreateTourController implements Initializable {
 
     @FXML
     private void onCreateButtonClicked() {
-        String tourName = nameTextField.getText();
-        float distance = Float.parseFloat(distanceTextField.getText());
+        String tourName;
+        String distanceText;
+
+        if (nameTextField.getText() == null || nameTextField.getText().isEmpty() || distanceTextField.getText().isEmpty()) {
+            showAlert("Name and Distance are required.");
+            return;
+        } else {
+            tourName = nameTextField.getText();
+            distanceText = distanceTextField.getText();
+        }
+
+        float distance;
+
+        try {
+            distance = Float.parseFloat(distanceText);
+        } catch (NumberFormatException e) {
+            showAlert("Invalid distance input.");
+            return;
+        }
+
         TourModel tour = new TourModel(
-                nameTextField.getText(),
+                tourName,
                 descriptionTextField.getText(),
                 fromTextField.getText(),
                 toTextField.getText(),
@@ -79,6 +95,16 @@ public class CreateTourController implements Initializable {
         viewModel.addTour(tour);
         closeStage();
     }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
 
     @FXML
     private void onCancelButtonClicked() {

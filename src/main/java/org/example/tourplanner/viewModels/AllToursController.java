@@ -7,14 +7,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.tourplanner.Models.TourModel;
 import org.example.tourplanner.TourPlannerApplication;
 import org.example.tourplanner.models.TourModel;
-import org.example.tourplanner.viewModels.MainViewModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -67,6 +69,30 @@ public class AllToursController implements Initializable {
         stage.setTitle("Add New Tour");
         stage.setScene(new Scene(root));
         stage.showAndWait(); // Zeigt das Fenster und wartet, bis es geschlossen wird
+    }
+
+    @FXML
+    protected void editTour(ActionEvent event) throws IOException {
+        TourModel selectedTour = tourTableView.getSelectionModel().getSelectedItem();
+        if (selectedTour != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/editTour.fxml"));
+            Parent root = fxmlLoader.load();
+
+            EditTourController editTourController = fxmlLoader.getController();
+            editTourController.setTourModel(selectedTour);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit Tour");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a tour to edit.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

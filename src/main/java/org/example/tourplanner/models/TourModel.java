@@ -1,4 +1,4 @@
-package org.example.tourplanner.models;
+package org.example.tourplanner.Models;
 
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
@@ -19,17 +19,16 @@ public class TourModel {
     private StringProperty time = new SimpleStringProperty();;
     private StringProperty routeInformation = new SimpleStringProperty();;
 
-
-
-    // Standardkonstruktor
     public TourModel() {}
 
-    // Konstruktor mit allen Parametern
-    public TourModel(String name, String description, String from, String to, String transportType) {
+    public TourModel(String name, String description, String from, String to, String transportType, Float distance, String time, String routeInformation) {
         this.name.set(name);
         this.tourDescription.set(description);
         this.from.set(from);
         this.to.set(to);
         this.transportType.set(transportType);
+        this.distance.set(distance);
+        this.time.set(time);
+        this.routeInformation.set(routeInformation);
     }
 }
