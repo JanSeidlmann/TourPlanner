@@ -8,7 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
-import org.example.tourplanner.Models.TourModel;
+import org.example.tourplanner.models.TourModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -89,7 +89,10 @@ public class CreateTourController implements Initializable {
                 descriptionTextField.getText(),
                 fromTextField.getText(),
                 toTextField.getText(),
-                transportType.getSelectionModel().getSelectedItem()
+                transportType.getSelectionModel().getSelectedItem(),
+                distance,
+                timeTextField.getText(),
+                routeInformationTextField.getText()
         );
         viewModel.addTourName(tourName);
         viewModel.addTour(tour);
@@ -116,4 +119,3 @@ public class CreateTourController implements Initializable {
         stage.close();  // Schließe die Stage
     }
 }
-

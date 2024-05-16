@@ -1,7 +1,7 @@
 package org.example.tourplanner;
 
 import javafx.stage.Stage;
-import org.example.tourplanner.Models.TourModel;
+import org.example.tourplanner.models.TourModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

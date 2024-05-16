@@ -23,12 +23,12 @@
                   <TableColumn fx:id="routeInformationColumn" prefWidth="75.0" text="Route information" />
               </columns>
           </TableView>
-      
-          <ButtonBar>
+
+          <ButtonBar buttonMinWidth="30.0">
               <buttons>
-                  <Button blendMode="SRC_ATOP" mnemonicParsing="false" onAction="#createTour" text="+" textAlignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#removeTour" text="-" />
-                  <Button mnemonicParsing="false" text="..." />
+                  <Button fx:id="addTourButton" mnemonicParsing="false" onAction="#createTour" text="+" />
+                  <Button fx:id="deleteTourButton" mnemonicParsing="false" onAction="#removeTour" text="-" />
+                  <Button mnemonicParsing="false" onAction="#editTour" text="..." />
               </buttons>
           </ButtonBar>
 

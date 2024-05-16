@@ -1,4 +1,4 @@
-package org.example.tourplanner.Models;
+package org.example.tourplanner.models;
 
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
