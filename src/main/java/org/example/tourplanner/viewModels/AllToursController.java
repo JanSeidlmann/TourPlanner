@@ -23,13 +23,12 @@ import java.util.ResourceBundle;
 
 public class AllToursController implements Initializable {
 
-    /*
+
     @FXML
     public ListView<String> tourListView;
-
-     */
     @FXML
     public TableView<TourModel> tourTableView;
+
 
     @FXML
     private TableColumn<TourModel, String> nameColumn;
@@ -114,7 +113,7 @@ public class AllToursController implements Initializable {
         timeColumn.setCellValueFactory(data -> data.getValue().getTime());
         routeInformationColumn.setCellValueFactory(data -> data.getValue().getRouteInformation());
 
-        //tourListView.setItems(viewModel.getTourNames());
+        tourListView.setItems(viewModel.getTourNames());
         tourTableView.setItems(viewModel.getTours());
     }
 }

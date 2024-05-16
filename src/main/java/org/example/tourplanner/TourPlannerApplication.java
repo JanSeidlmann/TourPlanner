@@ -18,7 +18,7 @@ public class TourPlannerApplication extends Application {
     @Override
     public void start(Stage mainStage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-screen.fxml")));
-        mainStage.setScene(new Scene(root, 600, 400));
+        mainStage.setScene(new Scene(root, 900, 600));
         mainStage.setTitle("Tour Planner by Jan and Laura");
         mainStage.show();
     }

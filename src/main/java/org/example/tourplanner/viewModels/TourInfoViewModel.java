@@ -1,5 +1,4 @@
 package org.example.tourplanner.viewModels;
 
-public class TourListController {
-
+public class TourInfoViewModel {
 }

@@ -9,4 +9,6 @@ module org.example.tourplanner {
     opens org.example.tourplanner.models to javafx.fxml;
     exports org.example.tourplanner.viewModels;
     opens org.example.tourplanner.viewModels to javafx.fxml;
+    opens org.example.tourplanner.controller to javafx.fxml;
+    exports org.example.tourplanner.controller;
 }

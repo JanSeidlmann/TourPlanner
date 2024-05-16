@@ -24,11 +24,17 @@
                             <Tab text="All tours">
                                 <fx:include source="all-tours.fxml" />
                             </Tab>
+
+                            <Tab text="Tour Info">
+                                <fx:include source="tour-info.fxml" />
+                            </Tab>
+
+                            <Tab text="Logs">
+
+                            </Tab>
                             <Tab text="All logs">
                                 <fx:include source="all-logs.fxml" />
                             </Tab>
-                            <Tab text="Tour Info" />
-                            <Tab text="Logs" />
                         </tabs>
                     </TabPane>
                 </VBox>
