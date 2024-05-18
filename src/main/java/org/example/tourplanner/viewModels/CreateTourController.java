@@ -44,11 +44,11 @@ public class CreateTourController implements Initializable {
     @FXML
     private ChoiceBox<String> transportType;
 
-    private MainViewModel viewModel;
+    private MainController mainController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewModel = MainViewModel.getInstance();
+        mainController = MainController.getInstance();
         transportType.getItems().setAll("Car", "Bike", "Walk");
 
         TourModel newTour = new TourModel();
@@ -94,8 +94,8 @@ public class CreateTourController implements Initializable {
                 timeTextField.getText(),
                 routeInformationTextField.getText()
         );
-        viewModel.addTourName(tourName);
-        viewModel.addTour(tour);
+        mainController.addTourName(tourName);
+        mainController.addTour(tour);
         closeStage();
     }
 

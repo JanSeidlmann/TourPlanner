@@ -41,12 +41,12 @@ public class EditTourController implements Initializable {
     @FXML
     private ChoiceBox<String> editTransportType;
 
-    private MainViewModel viewModel;
+    private MainController viewModel;
     private TourModel tourModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewModel = MainViewModel.getInstance();
+        viewModel = MainController.getInstance();
         editTransportType.getItems().setAll("Car", "Bike", "Walk");
     }
 

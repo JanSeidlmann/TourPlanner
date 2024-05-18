@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ListView?>
-<AnchorPane prefHeight="1400.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.viewModels.AllToursController">
-    <VBox prefHeight="1400.0" prefWidth="1800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <children>
-            <ListView fx:id="tourListView" prefHeight="1400.0" prefWidth="1800.0" />
-            <TableView fx:id="tourTableView" prefHeight="1400.0" prefWidth="1800.0">
-                <columns>
-                    <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                    <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
-                    <TableColumn fx:id="fromColumn" prefWidth="75.0" text="From" />
-                    <TableColumn fx:id="toColumn" prefWidth="75.0" text="To" />
-                    <TableColumn fx:id="transportTypeColumn" prefWidth="75.0" text="Transport" />
-                    <TableColumn fx:id="distanceColumn" prefWidth="75.0" text="Distance" />
-                    <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />
-                    <TableColumn fx:id="routeInformationColumn" prefWidth="75.0" text="Route information" />
-                </columns>
-            </TableView>
+<?import javafx.scene.control.TextField?>
+<AnchorPane prefHeight="1400.0" prefWidth="1800.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.tourplanner.viewModels.TourInfoController">
 
-            <ButtonBar buttonMinWidth="30.0">
-                <buttons>
-                    <Button fx:id="addTourButton" mnemonicParsing="false" onAction="#createTour" text="+" />
-                    <Button fx:id="deleteTourButton" mnemonicParsing="false" onAction="#removeTour" text="-" />
-                    <Button mnemonicParsing="false" onAction="#editTour" text="..." />
-                </buttons>
-            </ButtonBar>
-        </children>
+    <VBox prefHeight="1400.0" prefWidth="1800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Label fx:id="selectedTourName" prefWidth="300.0" text="Selected Tour: tour Name" />
+               <Button fx:id="editTourBnt" mnemonicParsing="false" onAction="#editTour" text="edit" />
+               <Button fx:id="deleteTourBtn" mnemonicParsing="false" onAction="#removeTour" text="delete" />
+            </children>
+         </HBox>
+         <HBox prefHeight="1400.0" prefWidth="200.0">
+            <VBox prefHeight="200.0" prefWidth="1000.0">
+               <TextField fx:id="nameField" layoutX="14.0" layoutY="14.0" promptText="Name"/>
+               <TextField fx:id="tourDescriptionField" layoutX="14.0" layoutY="44.0" promptText="Description"/>
+               <TextField fx:id="fromField" layoutX="14.0" layoutY="74.0" promptText="From"/>
+               <TextField fx:id="toField" layoutX="14.0" layoutY="104.0" promptText="To"/>
+               <TextField fx:id="transportTypeField" layoutX="14.0" layoutY="134.0" promptText="Transport Type"/>
+               <TextField fx:id="distanceField" layoutX="14.0" layoutY="164.0" promptText="Distance"/>
+               <TextField fx:id="timeField" layoutX="14.0" layoutY="194.0" promptText="Time"/>
+               <TextField fx:id="routeInformationField" layoutX="14.0" layoutY="224.0" promptText="Route Information"/>
+            </VBox>
+            <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true"/>
+         </HBox>
+         <Button fx:id="addLogBnt" mnemonicParsing="false" onAction="#addLog" text="Add Log" />
+      </children>
     </VBox>
 
 

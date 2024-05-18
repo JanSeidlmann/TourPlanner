@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1400.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.viewModels.LogViewModel">
+    <VBox prefHeight="1400.0" prefWidth="1800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Label fx:id="selectedTour" text="Selected tour" />
+               <Button fx:id="editLogBnt" mnemonicParsing="false" onAction="#editLog" text="edit" />
+               <Button fx:id="deleteLogBnt" mnemonicParsing="false" onAction="#deleteLog" text="delete" />
+            </children>
+         </HBox>
+         <ListView fx:id="logList" prefHeight="1400.0" prefWidth="200.0" />
+         <Button fx:id="addLogBnt" mnemonicParsing="false" onAction="#addLog" text="Add log" />
+      </children></VBox>
+
+
+</AnchorPane>

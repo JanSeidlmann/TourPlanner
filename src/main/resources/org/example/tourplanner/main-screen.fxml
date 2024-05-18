@@ -8,37 +8,31 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1600.0"
             prefWidth="1800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.tourplanner.viewModels.MainScreenController">
-    <children>
-        <VBox prefHeight="1400.0" prefWidth="1800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <HBox minHeight="50.0" prefHeight="80.0">
-                    <fx:include source="navbar.fxml" />
-                </HBox>
-                <VBox fx:id="mainScreenContent" alignment="CENTER" prefHeight="1400.0" prefWidth="1800.0">
-                    <TabPane prefHeight="1400" prefWidth="1800" tabClosingPolicy="UNAVAILABLE"
-                             AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                             AnchorPane.topAnchor="0.0">
-                        <tabs>
-                            <Tab text="All tours">
-                                <fx:include source="all-tours.fxml" />
-                            </Tab>
+            fx:controller="org.example.tourplanner.viewModels.MainController">
 
-                            <Tab text="Tour Info">
-                                <fx:include source="tour-info.fxml" />
-                            </Tab>
+    <VBox prefHeight="1400.0" prefWidth="1800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <HBox minHeight="50.0" prefHeight="80.0">
+            <fx:include source="navbar.fxml"/>
+        </HBox>
+        <VBox alignment="CENTER" prefHeight="1400.0" prefWidth="1800.0">
+            <TabPane fx:id="tabPane" prefHeight="1400" prefWidth="1800" tabClosingPolicy="UNAVAILABLE"
+                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                     AnchorPane.topAnchor="0.0">
+                <Tab fx:id="allToursTab" text="All tours">
+                    <fx:include source="all-tours.fxml"/>
+                </Tab>
+                <Tab fx:id="tourInfoTab" text="Tour Info">
+                    <fx:include source="tour-info.fxml"/>
+                </Tab>
 
-                            <Tab text="Logs">
-
-                            </Tab>
-                            <Tab text="All logs">
-                                <fx:include source="all-logs.fxml" />
-                            </Tab>
-                        </tabs>
-                    </TabPane>
-                </VBox>
-            </children>
+                <Tab text="Logs">
+                    <fx:include source="logs.fxml"/>
+                </Tab>
+                <Tab text="All logs">
+                    <fx:include source="all-logs.fxml"/>
+                </Tab>
+            </TabPane>
         </VBox>
-    </children>
+    </VBox>
 </AnchorPane>
