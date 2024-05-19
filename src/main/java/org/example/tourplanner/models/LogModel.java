@@ -1,34 +1,32 @@
 package org.example.tourplanner.models;
 
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class LogModel {
     // daten
-
-    // konstruktoren
-
-    // konstruktor mit allen parametern
-
-    /*
-        private StringProperty name = new SimpleStringProperty();
-    private StringProperty tourDescription = new SimpleStringProperty();
-    private StringProperty from = new SimpleStringProperty();
-    private StringProperty to = new SimpleStringProperty();
-    private StringProperty transportType = new SimpleStringProperty();
-    private FloatProperty distance = new SimpleFloatProperty();;
-    private StringProperty time = new SimpleStringProperty();;
-    private StringProperty routeInformation = new SimpleStringProperty();;
+    private StringProperty dateTime = new SimpleStringProperty();
+    private StringProperty comment = new SimpleStringProperty();
+    private IntegerProperty difficulty = new SimpleIntegerProperty();
+    private FloatProperty totalDistance = new SimpleFloatProperty();
+    private StringProperty totalTime = new SimpleStringProperty();
+    private IntegerProperty rating = new SimpleIntegerProperty();
 
 
+    public LogModel() {}
 
-    // Standardkonstruktor
-    public TourModel() {}
-
-    // Konstruktor mit allen Parametern
-    public TourModel(String name, String description, String from, String to, String transportType) {
-        this.name.set(name);
-        this.tourDescription.set(description);
-        this.from.set(from);
-        this.to.set(to);
-        this.transportType.set(transportType);
+    public LogModel(String dateTime, String comment, int difficulty, float totalDistance, String totalTime, int rating) {
+        this.dateTime.set(dateTime);
+        this.comment.set(comment);
+        this.difficulty.set(difficulty);
+        this.totalDistance.set(totalDistance);
+        this.totalTime.set(totalTime);
+        this.rating.set(rating);
     }
-     */
+
 }

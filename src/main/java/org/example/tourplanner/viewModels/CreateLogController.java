@@ -2,85 +2,119 @@ package org.example.tourplanner.viewModels;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.models.LogModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CreateLogController implements Initializable {
 
-    // daten mit @FXML private property
-    /*
     @FXML
-    private Button createButton;
+    private Button createLogButton;
 
     @FXML
-    private TextField descriptionTextField;
+    private TextField dateTimeTextField;
 
     @FXML
-    private TextField distanceTextField;
+    private TextField commentTextField;
 
     @FXML
-    private TextField fromTextField;
+    private TextField difficultyTextField;
 
     @FXML
-    private TextField nameTextField;
+    private TextField totalDistanceTextField;
 
     @FXML
-    private TextField routeInformationTextField;
+    private TextField totalTimeTextField;
 
     @FXML
-    private TextField timeTextField;
+    private ChoiceBox<Integer> ratingChoiceBox;
 
-    @FXML
-    private TextField toTextField;
-
-    @FXML
-    private ChoiceBox<String> transportType;
-
- */
-
-    private MainViewModel viewModel;
+    private MainController mainController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewModel = MainViewModel.getInstance();
-        /*
-        transportType.getItems().setAll("Car", "Bike", "Walk");
+        mainController = MainController.getInstance();
+        ratingChoiceBox.getItems().setAll(1, 2, 3, 4, 5);
 
-        TourModel newTour = new TourModel();
-        nameTextField.textProperty().bindBidirectional(newTour.getName());
-        descriptionTextField.textProperty().bindBidirectional(newTour.getTourDescription());
-        fromTextField.textProperty().bindBidirectional(newTour.getFrom());
-        toTextField.textProperty().bindBidirectional(newTour.getTo());
-        transportType.valueProperty().bindBidirectional(newTour.getTransportType());
-        distanceTextField.textProperty().bindBidirectional(newTour.getDistance(), new NumberStringConverter());
-        timeTextField.textProperty().bindBidirectional(newTour.getTime());
-        routeInformationTextField.textProperty().bindBidirectional(newTour.getRouteInformation());
-         */
+        LogModel newLog = new LogModel();
+        dateTimeTextField.textProperty().bindBidirectional(newLog.getDateTime());
+        commentTextField.textProperty().bindBidirectional(newLog.getComment());
+        difficultyTextField.textProperty().bindBidirectional(newLog.getDifficulty(), new NumberStringConverter());
+        totalDistanceTextField.textProperty().bindBidirectional(newLog.getTotalDistance(), new NumberStringConverter());
+        totalTimeTextField.textProperty().bindBidirectional(newLog.getTotalTime());
+        ratingChoiceBox.valueProperty().bindBidirectional(newLog.getRating().asObject());
     }
 
-
-    /*
     @FXML
-    private void onCreateButtonClicked() {
-        String tourName = nameTextField.getText();
-        float distance = Float.parseFloat(distanceTextField.getText());
-        TourModel tour = new TourModel(
-                nameTextField.getText(),
-                descriptionTextField.getText(),
-                fromTextField.getText(),
-                toTextField.getText(),
-                transportType.getSelectionModel().getSelectedItem()
+    private void onCreateLogButtonClicked() {
+        String dateTime;
+        String difficultyText;
+        String totalDistanceText;
+        String rating;
+
+        if (dateTimeTextField.getText() == null || dateTimeTextField.getText().isEmpty() ||
+                difficultyTextField.getText().isEmpty() || totalDistanceTextField.getText().isEmpty() ||
+                ratingChoiceBox.getValue() == null) {
+            showAlert("Date/Time, Difficulty, Distance, and Rating are required.");
+            return;
+        } else {
+            dateTime = dateTimeTextField.getText();
+            difficultyText = difficultyTextField.getText();
+            totalDistanceText = totalDistanceTextField.getText();
+            rating = ratingChoiceBox.getValue().toString();
+        }
+
+        int difficulty;
+        float totalDistance;
+        int logRating;
+
+        try {
+            difficulty = Integer.parseInt(difficultyText);
+        } catch (NumberFormatException e) {
+            showAlert("Invalid difficulty input.");
+            return;
+        }
+
+        try {
+            totalDistance = Float.parseFloat(totalDistanceText);
+        } catch (NumberFormatException e) {
+            showAlert("Invalid distance input.");
+            return;
+        }
+
+        try {
+            logRating = Integer.parseInt(rating);
+        } catch (NumberFormatException e) {
+            showAlert("Invalid rating input.");
+            return;
+        }
+
+        LogModel log = new LogModel(
+                dateTime,
+                commentTextField.getText(),
+                difficulty,
+                totalDistance,
+                totalTimeTextField.getText(),
+                logRating
         );
-        viewModel.addTourName(tourName);
-        viewModel.addTour(tour);
+        mainController.addLog(log);
+        mainController.switchToLogsTab();
         closeStage();
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
@@ -89,9 +123,7 @@ public class CreateLogController implements Initializable {
     }
 
     private void closeStage() {
-        Stage stage = (Stage) createButton.getScene().getWindow();  // Hole die Stage über den Save-Button
-        stage.close();  // Schließe die Stage
+        Stage stage = (Stage) createLogButton.getScene().getWindow();
+        stage.close();
     }
-     */
 }
-

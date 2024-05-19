@@ -19,19 +19,17 @@
             <TabPane fx:id="tabPane" prefHeight="1400" prefWidth="1800" tabClosingPolicy="UNAVAILABLE"
                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                      AnchorPane.topAnchor="0.0">
+
                 <Tab fx:id="allToursTab" text="All tours">
                     <fx:include source="all-tours.fxml"/>
                 </Tab>
                 <Tab fx:id="tourInfoTab" text="Tour Info">
                     <fx:include source="tour-info.fxml"/>
                 </Tab>
-
-                <Tab text="Logs">
+                <Tab fx:id="logsTab" text="Logs">
                     <fx:include source="logs.fxml"/>
                 </Tab>
-                <Tab text="All logs">
-                    <fx:include source="all-logs.fxml"/>
-                </Tab>
+
             </TabPane>
         </VBox>
     </VBox>

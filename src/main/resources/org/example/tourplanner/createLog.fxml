@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="400.0" minWidth="600.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.tourplanner.viewModels.CreateLogController">
+    <styleClass>
+        <String fx:value="button" />
+        <String fx:value="pane" />
+    </styleClass>
+    <children>
+        <Label fx:id="labelNewWindow" layoutX="223.0" prefHeight="45.0" prefWidth="140.0" text="Create Log">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="28.0" layoutY="70.0" text="Date/Time:" />
+        <TextField fx:id="dateTimeTextField" layoutX="100.0" layoutY="66.0" prefHeight="25.0" prefWidth="433.0" />
+        <Label layoutX="28.0" layoutY="100.0" text="Comment:" />
+        <TextField fx:id="commentTextField" layoutX="94.0" layoutY="96.0" prefHeight="59.0" prefWidth="439.0" />
+        <Label layoutX="28.0" layoutY="164.0" text="Difficulty:" />
+        <TextField fx:id="difficultyTextField" layoutX="100.0" layoutY="160.0" prefHeight="25.0" prefWidth="433.0" />
+        <Label layoutX="28.0" layoutY="194.0" text="Total Distance:" />
+        <TextField fx:id="totalDistanceTextField" layoutX="120.0" layoutY="190.0" prefHeight="25.0" prefWidth="413.0" />
+        <Label layoutX="28.0" layoutY="224.0" text="Total Time:" />
+        <TextField fx:id="totalTimeTextField" layoutX="100.0" layoutY="220.0" prefHeight="25.0" prefWidth="433.0" />
+        <Label layoutX="28.0" layoutY="254.0" text="Rating:" />
+        <ChoiceBox fx:id="ratingChoiceBox" layoutX="75.0" layoutY="250.0" prefWidth="150.0" />
+        <Button fx:id="createLogButton" layoutX="483.0" layoutY="361.0" mnemonicParsing="false" onAction="#onCreateLogButtonClicked" text="Create" />
+        <Button fx:id="cancelLogButton" layoutX="424.0" layoutY="361.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Cancel" />
+    </children>
+</AnchorPane>

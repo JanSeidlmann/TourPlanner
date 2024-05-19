@@ -103,6 +103,7 @@ public class EditTourController implements Initializable {
 
             viewModel.getTourNames().remove(oldName);
             viewModel.getTourNames().add(editNameTextField.getText());
+            viewModel.updateSelectedTour(tourModel);
 
             closeStage();
         }

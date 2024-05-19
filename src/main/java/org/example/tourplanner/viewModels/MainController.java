@@ -27,51 +27,35 @@ public class MainController implements Initializable {
     @FXML
     private Tab tourInfoTab;
     @FXML
+    private Tab logsTab;
+
+    @FXML
     private AllToursController allToursController = new AllToursController();
     @FXML
     private TourInfoController tourInfoController = new TourInfoController();
+    @FXML
+    private LogController logController = new LogController();
 
     private static MainController instance;
     private final ObservableList<TourModel> tours = FXCollections.observableArrayList();
     private final ObservableList<String> tourNames = FXCollections.observableArrayList();
-    private final ObservableList<LogModel> logs = FXCollections.observableArrayList();
+    //private final ObservableList<LogModel> logs = FXCollections.observableArrayList();
     private final ObservableList<String> logNames = FXCollections.observableArrayList();
+
+    private TourModel selectedTour;
+    private LogModel selectedLog;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initializing MainController...");
-        System.out.println("tabPane: " + tabPane);
-        System.out.println("tourInfoTab: " + tourInfoTab);
         if (allToursController != null) {
             allToursController.setMainController(this);
         }
+        if (logController != null) {
+            logController.setMainController(this);
+        }
         loadTourInfoView();
-        System.out.println("tourInfoController: " + tourInfoController);
+        loadLogView();
     }
-
-    private void loadTourInfoView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/tourplanner/tour-info.fxml"));
-            AnchorPane tourInfoContent = loader.load();
-            tourInfoTab.setContent(tourInfoContent);
-            tourInfoController = loader.getController();
-            System.out.println("Loaded TourInfo view. tourInfoController: " + tourInfoController);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void switchToTourInfoTab(TourModel selectedTour) {
-        if (tourInfoController != null) {
-            System.out.println("Switching to Tour Info tab with selected tour: " + selectedTour);
-            tourInfoController.setTourInfo(selectedTour);
-            System.out.println("back in switchToTourInfoTab after tourInfoController.setTourInfo()");
-            tabPane.getSelectionModel().select(tourInfoTab);
-        } else {
-            System.out.println("tourInfoController is null!");
-        }
-    }
-
 
     // Privater Konstruktor für Singleton
     public MainController() {
@@ -86,6 +70,71 @@ public class MainController implements Initializable {
         return instance;
     }
 
+    private void loadTourInfoView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/tourplanner/tour-info.fxml"));
+            AnchorPane tourInfoContent = loader.load();
+            tourInfoTab.setContent(tourInfoContent);
+            tourInfoController = loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLogView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/tourplanner/logs.fxml"));
+            AnchorPane logsContent = loader.load();
+            logsTab.setContent(logsContent);
+            logController = loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public  void switchToAllToursTab() {
+        if (selectedTour != null) {
+            tourInfoController.setSelectedTour(selectedTour);
+
+        } else {
+            tourInfoController.setSelectedTour(null);
+        }
+        logController.setLogsOfTour();
+        tabPane.getSelectionModel().select(allToursTab);
+    }
+
+    public void switchToTourInfoTab(TourModel selectedTour) {
+        this.selectedTour = selectedTour;
+        if (tourInfoController != null) {
+            tourInfoController.setSelectedTour(selectedTour);
+            tourInfoController.setTourInfo(selectedTour);
+            logController.setLogsOfTour();
+            tabPane.getSelectionModel().select(tourInfoTab);
+        } else {
+            System.out.println("tourInfoController is null!");
+        }
+    }
+
+    public void switchToLogsTab() {
+        if (logController != null) {
+            logController.setLogsOfTour();
+            tabPane.getSelectionModel().select(logsTab);
+        } else {
+            System.out.println("logController is null");
+        }
+    }
+
+    public void updateSelectedTour(TourModel tour) {
+        setSelectedTour(tour);
+        tourInfoController.setTourInfo(selectedTour);
+        logController.setLogsOfTour();
+    }
+
+    public void setSelectedTour(TourModel tour) {
+        selectedTour = tour;
+    }
+
+
     public void addTour(TourModel tour) {
         tours.add(tour);
     }
@@ -94,8 +143,37 @@ public class MainController implements Initializable {
         tourNames.add(tourName);
     }
 
+    public void removeTour(TourModel tour) {
+        tours.remove(tour);
+        tourNames.remove(tour.getName().toString());
+        selectedTour = null;
+        tourInfoController.setTourInfo(null);
+        logController.setLogsOfTour();
+    }
+
+    public String getSelectedTourName() {
+        if (selectedTour != null) {
+            return selectedTour.getName().getValue();
+        } else {
+            return "null";
+        }
+    }
+
+    public ObservableList<LogModel> getLogs() {
+        if (selectedTour != null) {
+            return selectedTour.getLogs();
+        } else {
+            return null;
+        }
+    }
+
     public void addLog(LogModel log) {
-        logs.add(log);
+        selectedTour.addLog(log);
+    }
+
+    public void removeLog(LogModel log) {
+        selectedTour.removeLog(log);
+        logController.setLogsOfTour();
     }
 
     public void addLogName(String logName) {

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lombok.Setter;
 import org.example.tourplanner.models.TourModel;
 import org.example.tourplanner.TourPlannerApplication;
 
@@ -21,29 +22,30 @@ public class TourInfoController implements Initializable {
     @FXML
     public Label selectedTourName;
     @FXML
-    private TextField nameField = new TextField();
+    private Label nameField = new Label();
     @FXML
-    private TextField tourDescriptionField = new TextField();
+    private Label tourDescriptionField = new Label();
     @FXML
-    private TextField fromField = new TextField();
+    private Label fromField = new Label();
     @FXML
-    private TextField toField = new TextField();
+    private Label toField = new Label();
     @FXML
-    private TextField transportTypeField = new TextField();
+    private Label transportTypeField = new Label();
     @FXML
-    private TextField distanceField = new TextField();
+    private Label distanceField = new Label();
     @FXML
-    private TextField timeField = new TextField();
+    private Label timeField = new Label();
     @FXML
-    private TextField routeInformationField = new TextField();
+    private Label routeInformationField = new Label();
 
-
+    @Setter
     private TourModel selectedTour;
     private MainController mainController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainController = MainController.getInstance();
+        selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
     }
 
     @FXML
@@ -71,24 +73,42 @@ public class TourInfoController implements Initializable {
 
     @FXML
     private void removeTour() {
+        mainController.removeTour(selectedTour);
+        mainController.switchToAllToursTab();
     }
 
     @FXML
-    private void addLog(ActionEvent actionEvent) {
+    protected void createLog(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/createLog.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Add New Log");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 
     public void setTourInfo(TourModel tour) {
-        System.out.println("Setting tour info to tour: " + tour);
         if (tour != null) {
-            nameField.setText(String.valueOf(tour.getName()));
-            tourDescriptionField.setText(String.valueOf(tour.getTourDescription()));
-            fromField.setText(String.valueOf(tour.getFrom()));
-            toField.setText(String.valueOf(tour.getTo()));
-            transportTypeField.setText(String.valueOf(tour.getTransportType()));
-            distanceField.setText(String.valueOf(tour.getDistance()));
-            timeField.setText(String.valueOf(tour.getTime()));
-            routeInformationField.setText(String.valueOf(tour.getRouteInformation()));
-            System.out.println("All set");
+            nameField.setText("Name: " + tour.getName().getValue());
+            tourDescriptionField.setText("Description: " + tour.getTourDescription().getValue());
+            fromField.setText("From: " + tour.getFrom().getValue());
+            toField.setText("To: " + tour.getTo().getValue());
+            transportTypeField.setText("TransportType: " + tour.getTransportType().getValue());
+            distanceField.setText("Distance: " + tour.getDistance().getValue());
+            timeField.setText("Time: " + tour.getTime().getValue());
+            routeInformationField.setText("Route information: " + tour.getRouteInformation().getValue());
+        } else {
+            nameField.setText("");
+            tourDescriptionField.setText("");
+            fromField.setText("");
+            toField.setText("");
+            transportTypeField.setText("");
+            distanceField.setText("");
+            timeField.setText("");
+            routeInformationField.setText("");
         }
+        selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
     }
 }

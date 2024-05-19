@@ -62,14 +62,12 @@ public class AllToursController implements Initializable {
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
-        System.out.println("MainController set in AllToursController");
     }
 
     private void handleRowClick(MouseEvent event) {
         if (event.getClickCount() == 2) { // Double-click detected
             TourModel selectedTour = tourTableView.getSelectionModel().getSelectedItem();
             if (selectedTour != null) {
-                System.out.println("Tour selected: " + selectedTour);
                 mainController.switchToTourInfoTab(selectedTour);
             } else {
                 System.out.println("No tour selected.");
@@ -79,7 +77,6 @@ public class AllToursController implements Initializable {
 
     @FXML
     protected void createTour(ActionEvent event) throws IOException {
-        // Verwende den ClassLoader, der die MainApp geladen hat, um die Ressource zu bekommen
         FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/createTour.fxml"));
         Parent root = fxmlLoader.load();
 

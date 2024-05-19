@@ -24,18 +24,18 @@
          </HBox>
          <HBox prefHeight="1400.0" prefWidth="200.0">
             <VBox prefHeight="200.0" prefWidth="1000.0">
-               <TextField fx:id="nameField" layoutX="14.0" layoutY="14.0" promptText="Name"/>
-               <TextField fx:id="tourDescriptionField" layoutX="14.0" layoutY="44.0" promptText="Description"/>
-               <TextField fx:id="fromField" layoutX="14.0" layoutY="74.0" promptText="From"/>
-               <TextField fx:id="toField" layoutX="14.0" layoutY="104.0" promptText="To"/>
-               <TextField fx:id="transportTypeField" layoutX="14.0" layoutY="134.0" promptText="Transport Type"/>
-               <TextField fx:id="distanceField" layoutX="14.0" layoutY="164.0" promptText="Distance"/>
-               <TextField fx:id="timeField" layoutX="14.0" layoutY="194.0" promptText="Time"/>
-               <TextField fx:id="routeInformationField" layoutX="14.0" layoutY="224.0" promptText="Route Information"/>
+               <Label fx:id="nameField" layoutX="14.0" layoutY="14.0" />
+               <Label fx:id="tourDescriptionField" layoutX="14.0" layoutY="44.0" />
+               <Label fx:id="fromField" layoutX="14.0" layoutY="74.0" />
+               <Label fx:id="toField" layoutX="14.0" layoutY="104.0" />
+               <Label fx:id="transportTypeField" layoutX="14.0" layoutY="134.0" />
+               <Label fx:id="distanceField" layoutX="14.0" layoutY="164.0" />
+               <Label fx:id="timeField" layoutX="14.0" layoutY="194.0" />
+               <Label fx:id="routeInformationField" layoutX="14.0" layoutY="224.0" />
             </VBox>
             <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true"/>
          </HBox>
-         <Button fx:id="addLogBnt" mnemonicParsing="false" onAction="#addLog" text="Add Log" />
+         <Button fx:id="addLogBnt" mnemonicParsing="false" onAction="#createLog" text="Add Log" />
       </children>
     </VBox>
 
