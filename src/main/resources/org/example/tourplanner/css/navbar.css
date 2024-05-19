@@ -1,0 +1,31 @@
+.root {
+    -fx-font-family: 'Arial';
+}
+
+.anchor-pane {
+    -fx-background-color: #66b2ff;
+}
+
+.hbox {
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-background-color: #66b2ff;
+}
+
+.text-field {
+    -fx-prompt-text-fill: white;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-margin: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #68a2de;
+}

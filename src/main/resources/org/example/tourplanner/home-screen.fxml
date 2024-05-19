@@ -4,6 +4,10 @@
 
 
 <?import javafx.scene.control.Label?>
+<?import java.net.URL?>
 <AnchorPane minHeight="300.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.viewModels.HomeScreenController">
+    <stylesheets>
+        <URL value="@css/home-screen.css" />
+    </stylesheets>
     <Label text="Load Data"></Label>
 </AnchorPane>

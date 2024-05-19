@@ -1,0 +1,16 @@
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-color: #f0f0f0;
+}
+
+.anchor-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+}
+
+.label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #0073e6;
+    -fx-padding: 10;
+}

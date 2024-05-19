@@ -19,25 +19,6 @@ Um das Projekt zu verwenden, müssen Sie Java und eine geeignete Entwicklungsumg
 3. Projekt ausführen:
    Führen Sie die Hauptklasse aus, um die Anwendung zu starten.
 
-## Projektstruktur
-
-projektname
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── example
-│   │   │           └── Main.java
-│   │   └── resources
-│   │       └── sample.fxml
-│   └── test
-│       └── java
-│           └── com
-│               └── example
-│                   └── MainTest.java
-├── pom.xml
-└── README.md
-
 ## Entwickler
 
 - Laura Engleitner

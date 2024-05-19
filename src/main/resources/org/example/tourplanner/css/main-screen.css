@@ -1,0 +1,41 @@
+/* main-screen-styles.css */
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-color: #f0f0f0;
+}
+
+.tab-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+}
+
+.tab {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10;
+}
+
+.tab-label {
+    -fx-font-weight: bold;
+}
+
+.hbox {
+    -fx-padding: 10;
+}
+
+.vbox {
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.button {
+    -fx-background-color: #0073e6;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10;
+}
+
+.button:hover {
+    -fx-background-color: #005bb5;
+}
+
