@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
@@ -15,6 +17,7 @@ import org.example.tourplanner.TourPlannerApplication;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TourInfoController implements Initializable {
@@ -37,6 +40,8 @@ public class TourInfoController implements Initializable {
     private Label timeField = new Label();
     @FXML
     private Label routeInformationField = new Label();
+    @FXML
+    private ImageView tourMap;
 
     @Setter
     private TourModel selectedTour;
@@ -98,7 +103,11 @@ public class TourInfoController implements Initializable {
             transportTypeField.setText("TransportType: " + tour.getTransportType().getValue());
             distanceField.setText("Distance: " + tour.getDistance().getValue());
             timeField.setText("Time: " + tour.getTime().getValue());
-            routeInformationField.setText("Route information: " + tour.getRouteInformation().getValue());
+            routeInformationField.setText("Route information: see map");
+
+            String imagePath = tour.getRouteInformation().getValue();
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+            tourMap.setImage(image);
         } else {
             nameField.setText("");
             tourDescriptionField.setText("");
@@ -108,6 +117,7 @@ public class TourInfoController implements Initializable {
             distanceField.setText("");
             timeField.setText("");
             routeInformationField.setText("");
+            tourMap.setImage(null);
         }
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
     }

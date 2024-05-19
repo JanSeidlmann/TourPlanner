@@ -92,7 +92,7 @@ public class CreateTourController implements Initializable {
                 transportType.getSelectionModel().getSelectedItem(),
                 distance,
                 timeTextField.getText(),
-                routeInformationTextField.getText()
+                "/org/example/tourplanner/img/map-placeholder.png"
         );
         mainController.addTourName(tourName);
         mainController.addTour(tour);
