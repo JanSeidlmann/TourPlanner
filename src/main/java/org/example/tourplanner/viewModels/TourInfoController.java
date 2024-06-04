@@ -96,16 +96,16 @@ public class TourInfoController implements Initializable {
 
     public void setTourInfo(TourModel tour) {
         if (tour != null) {
-            nameField.setText("Name: " + tour.getName().getValue());
-            tourDescriptionField.setText("Description: " + tour.getTourDescription().getValue());
-            fromField.setText("From: " + tour.getFrom().getValue());
-            toField.setText("To: " + tour.getTo().getValue());
-            transportTypeField.setText("TransportType: " + tour.getTransportType().getValue());
-            distanceField.setText("Distance: " + tour.getDistance().getValue());
-            timeField.setText("Time: " + tour.getTime().getValue());
+            nameField.setText("Name: " + tour.getNameProperty().getValue());
+            tourDescriptionField.setText("Description: " + tour.getTourDescriptionProperty().getValue());
+            fromField.setText("From: " + tour.getFromProperty().getValue());
+            toField.setText("To: " + tour.getToProperty().getValue());
+            transportTypeField.setText("TransportType: " + tour.getTransportTypeProperty().getValue());
+            distanceField.setText("Distance: " + tour.getDistanceProperty().getValue());
+            timeField.setText("Time: " + tour.getTimeProperty().getValue());
             routeInformationField.setText("Route information: see map");
 
-            String imagePath = tour.getRouteInformation().getValue();
+            String imagePath = tour.getRouteInformationProperty().getValue();
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
             tourMap.setImage(image);
         } else {

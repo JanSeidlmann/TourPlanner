@@ -47,14 +47,14 @@ public class AllToursController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainController = MainController.getInstance();
 
-        nameColumn.setCellValueFactory(data -> data.getValue().getName());
-        descriptionColumn.setCellValueFactory(data -> data.getValue().getTourDescription());
-        fromColumn.setCellValueFactory(data -> data.getValue().getFrom());
-        toColumn.setCellValueFactory(data -> data.getValue().getTo());
-        transportTypeColumn.setCellValueFactory(data -> data.getValue().getTransportType());
-        distanceColumn.setCellValueFactory(data -> data.getValue().getDistance().asObject());
-        timeColumn.setCellValueFactory(data -> data.getValue().getTime());
-        routeInformationColumn.setCellValueFactory(data -> data.getValue().getRouteInformation());
+        nameColumn.setCellValueFactory(data -> data.getValue().getNameProperty());
+        descriptionColumn.setCellValueFactory(data -> data.getValue().getTourDescriptionProperty());
+        fromColumn.setCellValueFactory(data -> data.getValue().getFromProperty());
+        toColumn.setCellValueFactory(data -> data.getValue().getToProperty());
+        transportTypeColumn.setCellValueFactory(data -> data.getValue().getTransportTypeProperty());
+        distanceColumn.setCellValueFactory(data -> data.getValue().getDistanceProperty().asObject());
+        timeColumn.setCellValueFactory(data -> data.getValue().getTimeProperty());
+        routeInformationColumn.setCellValueFactory(data -> data.getValue().getRouteInformationProperty());
 
         tourTableView.setItems(mainController.getTours());
         tourTableView.setOnMouseClicked(this::handleRowClick);
@@ -75,6 +75,7 @@ public class AllToursController implements Initializable {
         }
     }
 
+    // Beim Create haben wir Hilfe von Team 5 erhalten. Ist mit Lektor abgesprochen.
     @FXML
     protected void createTour(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/createTour.fxml"));

@@ -153,7 +153,7 @@ public class MainController implements Initializable {
 
     public String getSelectedTourName() {
         if (selectedTour != null) {
-            return selectedTour.getName().getValue();
+            return selectedTour.getNameProperty().getValue();
         } else {
             return "null";
         }

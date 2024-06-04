@@ -54,20 +54,20 @@ public class EditTourController implements Initializable {
         this.tourModel = tourModel;
 
         // Setze die Werte der ausgewählten Tour in die Textfelder und ChoiceBox
-        editNameTextField.setText(tourModel.getName().get());
-        editDescriptionTextField.setText(tourModel.getTourDescription().get());
-        editFromTextField.setText(tourModel.getFrom().get());
-        editToTextField.setText(tourModel.getTo().get());
-        editTimeTextField.setText(tourModel.getTime().get());
-        editDistanceTextField.setText(String.valueOf(tourModel.getDistance().get()));
-        editTransportType.setValue(tourModel.getTransportType().get());
-        editRouteInformationTextField.setText(tourModel.getRouteInformation().get());
+        editNameTextField.setText(tourModel.getNameProperty().get());
+        editDescriptionTextField.setText(tourModel.getTourDescriptionProperty().get());
+        editFromTextField.setText(tourModel.getFromProperty().get());
+        editToTextField.setText(tourModel.getToProperty().get());
+        editTimeTextField.setText(tourModel.getTimeProperty().get());
+        editDistanceTextField.setText(String.valueOf(tourModel.getDistanceProperty().get()));
+        editTransportType.setValue(tourModel.getTransportTypeProperty().get());
+        editRouteInformationTextField.setText(tourModel.getRouteInformationProperty().get());
     }
 
     @FXML
     private void editTour() {
         if (tourModel != null) {
-            String oldName = tourModel.getName().get();
+            String oldName = tourModel.getNameProperty().get();
 
             String name = editNameTextField.getText();
             String description = editDescriptionTextField.getText();
@@ -92,14 +92,14 @@ public class EditTourController implements Initializable {
             }
 
             // Aktualisiere die Werte der ausgewählten Tour
-            tourModel.getName().set(name);
-            tourModel.getTourDescription().set(description);
-            tourModel.getFrom().set(from);
-            tourModel.getTo().set(to);
-            tourModel.getTime().set(time);
-            tourModel.getDistance().set(distance);
-            tourModel.getTransportType().set(transportType);
-            tourModel.getRouteInformation().set(routeInformation);
+            tourModel.getNameProperty().set(name);
+            tourModel.getTourDescriptionProperty().set(description);
+            tourModel.getFromProperty().set(from);
+            tourModel.getToProperty().set(to);
+            tourModel.getTimeProperty().set(time);
+            tourModel.getDistanceProperty().set(distance);
+            tourModel.getTransportTypeProperty().set(transportType);
+            tourModel.getRouteInformationProperty().set(routeInformation);
 
             viewModel.getTourNames().remove(oldName);
             viewModel.getTourNames().add(editNameTextField.getText());

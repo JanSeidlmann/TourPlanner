@@ -44,6 +44,8 @@ public class CreateTourController implements Initializable {
     @FXML
     private ChoiceBox<String> transportType;
 
+    private CreateTourViewModel createTourViewModel = new CreateTourViewModel();
+
     private MainController mainController;
 
     @Override
@@ -52,14 +54,14 @@ public class CreateTourController implements Initializable {
         transportType.getItems().setAll("Car", "Bike", "Walk");
 
         TourModel newTour = new TourModel();
-        nameTextField.textProperty().bindBidirectional(newTour.getName());
-        descriptionTextField.textProperty().bindBidirectional(newTour.getTourDescription());
-        fromTextField.textProperty().bindBidirectional(newTour.getFrom());
-        toTextField.textProperty().bindBidirectional(newTour.getTo());
-        transportType.valueProperty().bindBidirectional(newTour.getTransportType());
-        distanceTextField.textProperty().bindBidirectional(newTour.getDistance(), new NumberStringConverter());
-        timeTextField.textProperty().bindBidirectional(newTour.getTime());
-        routeInformationTextField.textProperty().bindBidirectional(newTour.getRouteInformation());
+        nameTextField.textProperty().bindBidirectional(newTour.getNameProperty());
+        descriptionTextField.textProperty().bindBidirectional(newTour.getTourDescriptionProperty());
+        fromTextField.textProperty().bindBidirectional(newTour.getFromProperty());
+        toTextField.textProperty().bindBidirectional(newTour.getToProperty());
+        transportType.valueProperty().bindBidirectional(newTour.getTransportTypeProperty());
+        distanceTextField.textProperty().bindBidirectional(newTour.getDistanceProperty(), new NumberStringConverter());
+        timeTextField.textProperty().bindBidirectional(newTour.getTimeProperty());
+        routeInformationTextField.textProperty().bindBidirectional(newTour.getRouteInformationProperty());
     }
 
     @FXML
@@ -96,6 +98,7 @@ public class CreateTourController implements Initializable {
         );
         mainController.addTourName(tourName);
         mainController.addTour(tour);
+        createTourViewModel.addTour(tour);
         closeStage();
     }
 
