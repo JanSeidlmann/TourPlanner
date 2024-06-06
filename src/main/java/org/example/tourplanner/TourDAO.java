@@ -22,12 +22,12 @@ public class TourDAO extends BaseDAO<TourModel> {
     }
 
     @Override
-    public void save(TourModel user){
-        super.save(user);
+    public void save(TourModel tour){
+        super.save(tour);
     }
 
     @Override
-    public void delete(TourModel user){
-        super.delete(user);
+    public void delete(TourModel tour){
+        super.delete(tour);
     }
 }

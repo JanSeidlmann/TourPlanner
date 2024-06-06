@@ -17,11 +17,11 @@ public class TourService implements ITourService {
     }
 
     @Override
-    public void addUser(TourModel tour){
+    public void addTour(TourModel tour){
         tourDAO.save(tour);
     }
     @Override
-    public void deleteUser(TourModel tourModel){
+    public void deleteTour(TourModel tourModel){
         tourDAO.delete(tourModel);
     }
 }

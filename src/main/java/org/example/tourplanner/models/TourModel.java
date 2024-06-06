@@ -42,35 +42,50 @@ public class TourModel {
     private String routeInformation;
 
     @Transient
-    private StringProperty nameProperty = new SimpleStringProperty();
+    private StringProperty nameProperty;
     @Transient
-    private StringProperty tourDescriptionProperty = new SimpleStringProperty();
+    private StringProperty tourDescriptionProperty;
     @Transient
-    private StringProperty fromProperty = new SimpleStringProperty();
+    private StringProperty fromProperty;
     @Transient
-    private StringProperty toProperty = new SimpleStringProperty();
+    private StringProperty toProperty;
     @Transient
-    private StringProperty transportTypeProperty = new SimpleStringProperty();
+    private StringProperty transportTypeProperty;
     @Transient
-    private FloatProperty distanceProperty = new SimpleFloatProperty();
+    private FloatProperty distanceProperty;
     @Transient
-    private StringProperty timeProperty = new SimpleStringProperty();
+    private StringProperty timeProperty;
     @Transient
-    private StringProperty routeInformationProperty = new SimpleStringProperty();
+    private StringProperty routeInformationProperty;
     @Transient
-    private ObservableList<LogModel> logs = FXCollections.observableArrayList();
+    private ObservableList<LogModel> logs;
 
-    public TourModel() {}
+    public TourModel() {
+        initProperties();
+    }
 
     public TourModel(String name, String description, String from, String to, String transportType, Float distance, String time, String routeInformation) {
-        setName(name);
-        setTourDescription(description);
-        setFrom(from);
-        setTo(to);
-        setTransportType(transportType);
-        setDistance(distance);
-        setTime(time);
-        setRouteInformation(routeInformation);
+        this.name = name;
+        this.tourDescription = description;
+        this.from = from;
+        this.to = to;
+        this.transportType = transportType;
+        this.distance = distance;
+        this.time = time;
+        this.routeInformation = routeInformation;
+        initProperties();
+    }
+
+    private void initProperties() {
+        this.nameProperty = new SimpleStringProperty(this.name);
+        this.tourDescriptionProperty = new SimpleStringProperty(this.tourDescription);
+        this.fromProperty = new SimpleStringProperty(this.from);
+        this.toProperty = new SimpleStringProperty(this.to);
+        this.transportTypeProperty = new SimpleStringProperty(this.transportType);
+        this.distanceProperty = new SimpleFloatProperty(this.distance != null ? this.distance : 0.0f);
+        this.timeProperty = new SimpleStringProperty(this.time);
+        this.routeInformationProperty = new SimpleStringProperty(this.routeInformation);
+        this.logs = FXCollections.observableArrayList();
     }
 
     @PostLoad

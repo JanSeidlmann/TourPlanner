@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ITourService {
     List<TourModel> getAllUsers();
-    void addUser(TourModel tour);
-    void deleteUser(TourModel tourModel);
+    void addTour(TourModel tour);
+    void deleteTour(TourModel tourModel);
 }

@@ -13,8 +13,6 @@ import org.example.tourplanner.models.TourModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static javafx.beans.binding.Bindings.isEmpty;
-
 public class CreateTourController implements Initializable {
 
     @FXML
@@ -44,7 +42,7 @@ public class CreateTourController implements Initializable {
     @FXML
     private ChoiceBox<String> transportType;
 
-    private CreateTourViewModel createTourViewModel = new CreateTourViewModel();
+    private final CreateTourViewModel createTourViewModel = new CreateTourViewModel();
 
     private MainController mainController;
 
@@ -54,49 +52,49 @@ public class CreateTourController implements Initializable {
         transportType.getItems().setAll("Car", "Bike", "Walk");
 
         TourModel newTour = new TourModel();
-        nameTextField.textProperty().bindBidirectional(newTour.getNameProperty());
-        descriptionTextField.textProperty().bindBidirectional(newTour.getTourDescriptionProperty());
-        fromTextField.textProperty().bindBidirectional(newTour.getFromProperty());
-        toTextField.textProperty().bindBidirectional(newTour.getToProperty());
-        transportType.valueProperty().bindBidirectional(newTour.getTransportTypeProperty());
-        distanceTextField.textProperty().bindBidirectional(newTour.getDistanceProperty(), new NumberStringConverter());
-        timeTextField.textProperty().bindBidirectional(newTour.getTimeProperty());
-        routeInformationTextField.textProperty().bindBidirectional(newTour.getRouteInformationProperty());
+        bindProperties(newTour);
+    }
+
+    private void bindProperties(TourModel tour) {
+        nameTextField.textProperty().bindBidirectional(tour.getNameProperty());
+        descriptionTextField.textProperty().bindBidirectional(tour.getTourDescriptionProperty());
+        fromTextField.textProperty().bindBidirectional(tour.getFromProperty());
+        toTextField.textProperty().bindBidirectional(tour.getToProperty());
+        transportType.valueProperty().bindBidirectional(tour.getTransportTypeProperty());
+        distanceTextField.textProperty().bindBidirectional(tour.getDistanceProperty(), new NumberStringConverter());
+        timeTextField.textProperty().bindBidirectional(tour.getTimeProperty());
+        routeInformationTextField.textProperty().bindBidirectional(tour.getRouteInformationProperty());
     }
 
     @FXML
     private void onCreateButtonClicked() {
-        String tourName;
-        String distanceText;
-
         if (nameTextField.getText() == null || nameTextField.getText().isEmpty() || distanceTextField.getText().isEmpty()) {
             showAlert("Name and Distance are required.");
-            return;
-        } else {
-            tourName = nameTextField.getText();
-            distanceText = distanceTextField.getText();
-        }
-
-        float distance;
-
-        try {
-            distance = Float.parseFloat(distanceText);
-        } catch (NumberFormatException e) {
-            showAlert("Invalid distance input.");
             return;
         }
 
         TourModel tour = new TourModel(
-                tourName,
+                nameTextField.getText(),
                 descriptionTextField.getText(),
                 fromTextField.getText(),
                 toTextField.getText(),
                 transportType.getSelectionModel().getSelectedItem(),
-                distance,
+                Float.parseFloat(distanceTextField.getText()),
                 timeTextField.getText(),
-                "/org/example/tourplanner/img/map-placeholder.png"
+                routeInformationTextField.getText()
         );
-        mainController.addTourName(tourName);
+
+        // Logge die Werte vor dem Speichern
+        System.out.println("Tour Name: " + tour.getName());
+        System.out.println("Description: " + tour.getTourDescription());
+        System.out.println("From: " + tour.getFrom());
+        System.out.println("To: " + tour.getTo());
+        System.out.println("Transport Type: " + tour.getTransportType());
+        System.out.println("Distance: " + tour.getDistance());
+        System.out.println("Time: " + tour.getTime());
+        System.out.println("Route Information: " + tour.getRouteInformation());
+
+        mainController.addTourName(tour.getName());
         mainController.addTour(tour);
         createTourViewModel.addTour(tour);
         closeStage();
@@ -110,15 +108,13 @@ public class CreateTourController implements Initializable {
         alert.showAndWait();
     }
 
-
-
     @FXML
     private void onCancelButtonClicked() {
         closeStage();
     }
 
     private void closeStage() {
-        Stage stage = (Stage) createButton.getScene().getWindow();  // Hole die Stage über den Save-Button
-        stage.close();  // Schließe die Stage
+        Stage stage = (Stage) createButton.getScene().getWindow();
+        stage.close();
     }
 }

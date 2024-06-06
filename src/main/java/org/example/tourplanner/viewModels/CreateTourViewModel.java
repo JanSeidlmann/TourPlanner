@@ -26,12 +26,12 @@ public class CreateTourViewModel {
     }
 
     public void addTour(TourModel tourModel) {
-        tourService.addUser(tourModel);
+        tourService.addTour(tourModel);
         loadTours();
     }
 
     public void deleteTour(TourModel tourModel) {
-        tourService.deleteUser(tourModel);
+        tourService.deleteTour(tourModel);
         loadTours();
     }
 }
