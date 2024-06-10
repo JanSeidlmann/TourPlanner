@@ -44,6 +44,7 @@ public class MainController implements Initializable {
 
     private TourModel selectedTour;
     private LogModel selectedLog;
+    private CreateTourViewModel createTourViewModel  = new CreateTourViewModel();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -149,6 +150,7 @@ public class MainController implements Initializable {
         selectedTour = null;
         tourInfoController.setTourInfo(null);
         logController.setLogsOfTour();
+        createTourViewModel.deleteTour(tour);
     }
 
     public String getSelectedTourName() {

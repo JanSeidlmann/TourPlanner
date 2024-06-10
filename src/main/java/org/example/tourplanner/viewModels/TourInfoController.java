@@ -105,7 +105,7 @@ public class TourInfoController implements Initializable {
             timeField.setText("Time: " + tour.getTimeProperty().getValue());
             routeInformationField.setText("Route information: see map");
 
-            String imagePath = tour.getRouteInformationProperty().getValue();
+            String imagePath = "/org/example/tourplanner/img/" + tour.getRouteInformationProperty().getValue();
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
             tourMap.setImage(image);
         } else {
