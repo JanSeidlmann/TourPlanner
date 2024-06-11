@@ -72,6 +72,9 @@ public class CreateTourController implements Initializable {
             showAlert("Name and Distance are required.");
             return;
         }
+        if (routeInformationTextField.getText() == null) {
+            routeInformationTextField.setText("map-placeholder.png");
+        }
 
         TourModel tour = new TourModel(
                 nameTextField.getText(),
