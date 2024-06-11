@@ -1,9 +1,11 @@
-package org.example.tourplanner;
+package org.example.tourplanner.DAL.repositories;
 
+import org.example.tourplanner.DAL.HibernateUtil;
+import org.example.tourplanner.Injectable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public abstract class BaseDAO<T> {
+public abstract class BaseDAO<T> implements Injectable {
     protected Session getSession() {
         return HibernateUtil.getSessionFactory().openSession();
     }

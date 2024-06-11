@@ -5,7 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="1400.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.viewModels.TourInfoController">
+<AnchorPane prefHeight="1400.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.PL.viewModels.TourInfoController">
    <stylesheets>
       <URL value="@css/tour-info.css" />
    </stylesheets>

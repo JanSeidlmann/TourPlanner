@@ -1,4 +1,4 @@
-package org.example.tourplanner.models;
+package org.example.tourplanner.BL.models;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;

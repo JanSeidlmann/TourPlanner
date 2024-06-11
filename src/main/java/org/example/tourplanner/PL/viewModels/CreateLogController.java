@@ -1,4 +1,4 @@
-package org.example.tourplanner.viewModels;
+package org.example.tourplanner.PL.viewModels;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,7 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
-import org.example.tourplanner.models.LogModel;
+import org.example.tourplanner.BL.models.LogModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;

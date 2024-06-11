@@ -1,5 +1,5 @@
-package org.example.tourplanner;
-import org.example.tourplanner.models.TourModel;
+package org.example.tourplanner.DAL.repositories;
+import org.example.tourplanner.BL.models.TourModel;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

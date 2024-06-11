@@ -1,7 +1,5 @@
-package org.example.tourplanner.viewModels;
+package org.example.tourplanner.PL.viewModels;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,16 +9,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import lombok.Getter;
+import org.example.tourplanner.Injectable;
 import org.example.tourplanner.TourPlannerApplication;
-import org.example.tourplanner.models.LogModel;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.BL.models.LogModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LogController implements Initializable {
+public class LogController implements Initializable, Injectable {
 
     @FXML
     public TableView<LogModel> logTableView;

@@ -1,4 +1,4 @@
-package org.example.tourplanner.viewModels;
+package org.example.tourplanner.PL.viewModels;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.Injectable;
 import org.example.tourplanner.TourPlannerApplication;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class TourInfoController implements Initializable {
+public class TourInfoController implements Initializable, Injectable {
 
     @FXML
     public Label selectedTourName;
@@ -49,7 +50,7 @@ public class TourInfoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        mainController = MainController.getInstance();
+        mainController = MainController.getInstance(); // Passt das so oder gehört da auch mit DefaultInjector?????????????????????????
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
     }
 

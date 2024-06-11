@@ -1,20 +1,22 @@
-package org.example.tourplanner.viewModels;
+package org.example.tourplanner.PL.viewModels;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
-import org.example.tourplanner.ITourService;
-import org.example.tourplanner.TourService;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.BL.ITourService;
+import org.example.tourplanner.BL.TourService;
+import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.DefaultInjector;
+import org.example.tourplanner.Injectable;
 
-public class CreateTourViewModel {
+public class CreateTourViewModel implements Injectable {
     private final ITourService tourService;
 
     @Getter
     private ObservableList<TourModel> tourTableList;
 
     public CreateTourViewModel() {
-        this.tourService = new TourService();
+        this.tourService = DefaultInjector.getService(TourService.class);
         this.tourTableList = FXCollections.observableArrayList();
         loadTours();
     }

@@ -18,7 +18,7 @@
 
     <property name="hbm2ddl.auto">update</property>
 
-    <mapping class="org.example.tourplanner.models.TourModel"/>
+    <mapping class="org.example.tourplanner.BL.models.TourModel"/>
 
   </session-factory>
 </hibernate-configuration>

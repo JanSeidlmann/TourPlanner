@@ -1,4 +1,4 @@
-package org.example.tourplanner.viewModels;
+package org.example.tourplanner.PL.viewModels;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,7 +8,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.DefaultInjector;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,9 +43,13 @@ public class CreateTourController implements Initializable {
     @FXML
     private ChoiceBox<String> transportType;
 
-    private final CreateTourViewModel createTourViewModel = new CreateTourViewModel();
+    private final CreateTourViewModel createTourViewModel;
 
     private MainController mainController;
+
+    public CreateTourController() {
+        this.createTourViewModel = DefaultInjector.getService(CreateTourViewModel.class);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -1,4 +1,4 @@
-package org.example.tourplanner.viewModels;
+package org.example.tourplanner.PL.viewModels;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.BL.models.TourModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,6 +42,7 @@ public class EditTourController implements Initializable {
     private ChoiceBox<String> editTransportType;
 
     private MainController viewModel;
+
     private TourModel tourModel;
 
     @Override

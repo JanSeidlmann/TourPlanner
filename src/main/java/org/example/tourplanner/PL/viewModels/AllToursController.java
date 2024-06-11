@@ -1,4 +1,4 @@
-package org.example.tourplanner.viewModels;
+package org.example.tourplanner.PL.viewModels;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,16 +10,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.example.tourplanner.models.TourModel;
+import lombok.Setter;
+import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.Injectable;
 import org.example.tourplanner.TourPlannerApplication;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AllToursController implements Initializable {
+public class AllToursController implements Initializable, Injectable {
 
     @FXML
     public TableView<TourModel> tourTableView;
@@ -41,6 +42,7 @@ public class AllToursController implements Initializable {
     @FXML
     private TableColumn<TourModel, String> routeInformationColumn;
 
+    @Setter
     private MainController mainController;
 
     @Override
@@ -58,10 +60,6 @@ public class AllToursController implements Initializable {
 
         tourTableView.setItems(mainController.getTours());
         tourTableView.setOnMouseClicked(this::handleRowClick);
-    }
-
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
     }
 
     private void handleRowClick(MouseEvent event) {

@@ -1,4 +1,4 @@
-package org.example.tourplanner.viewModels;
+package org.example.tourplanner.PL.viewModels;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,18 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
-import org.example.tourplanner.models.LogModel;
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.BL.models.LogModel;
+import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.DefaultInjector;
+import org.example.tourplanner.Injectable;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Getter
-public class MainController implements Initializable {
+public class MainController implements Initializable, Injectable {
 
     @FXML
     private TabPane tabPane;
@@ -30,11 +31,11 @@ public class MainController implements Initializable {
     private Tab logsTab;
 
     @FXML
-    private AllToursController allToursController = new AllToursController();
+    private AllToursController allToursController;
     @FXML
-    private TourInfoController tourInfoController = new TourInfoController();
+    private TourInfoController tourInfoController;
     @FXML
-    private LogController logController = new LogController();
+    private LogController logController;
 
     private static MainController instance;
     private final ObservableList<TourModel> tours = FXCollections.observableArrayList();
@@ -44,7 +45,15 @@ public class MainController implements Initializable {
 
     private TourModel selectedTour;
     private LogModel selectedLog;
-    private CreateTourViewModel createTourViewModel  = new CreateTourViewModel();
+    private final CreateTourViewModel createTourViewModel;
+
+    public MainController(){
+        this.allToursController = DefaultInjector.getService(AllToursController.class);
+        this.tourInfoController = DefaultInjector.getService(TourInfoController.class);
+        this.logController = DefaultInjector.getService(LogController.class);
+        this.createTourViewModel = DefaultInjector.getService(CreateTourViewModel.class);
+        instance = this;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,15 +67,10 @@ public class MainController implements Initializable {
         loadLogView();
     }
 
-    // Privater Konstruktor für Singleton
-    public MainController() {
-        instance = this;
-    }
-
     // Öffentliche Methode zur Abfrage der Singleton-Instanz
     public static MainController getInstance() {
         if (instance == null) {
-            instance = new MainController();
+            instance = DefaultInjector.getService(MainController.class);
         }
         return instance;
     }

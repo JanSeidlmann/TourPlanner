@@ -1,6 +1,6 @@
-package org.example.tourplanner;
+package org.example.tourplanner.BL;
 
-import org.example.tourplanner.models.TourModel;
+import org.example.tourplanner.BL.models.TourModel;
 
 import java.util.List;
 

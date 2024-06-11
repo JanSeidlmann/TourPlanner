@@ -1,4 +1,4 @@
-package org.example.tourplanner.models;
+package org.example.tourplanner.BL.models;
 
 import javax.persistence.*;
 import javafx.beans.property.FloatProperty;
