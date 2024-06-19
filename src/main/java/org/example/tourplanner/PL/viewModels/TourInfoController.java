@@ -9,11 +9,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
 import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
+import org.example.tourplanner.OpenRouteService;
 import org.example.tourplanner.TourPlannerApplication;
 
 import java.io.IOException;
@@ -43,15 +47,78 @@ public class TourInfoController implements Initializable, Injectable {
     private Label routeInformationField = new Label();
     @FXML
     private ImageView tourMap;
+    @FXML
+    private WebView webView;
+
+    private WebEngine webEngine;
 
     @Setter
     private TourModel selectedTour;
+
     private MainController mainController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        mainController = MainController.getInstance(); // Passt das so oder gehört da auch mit DefaultInjector?????????????????????????
+        mainController = MainController.getInstance();
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
+        // this.webView.disableProperty().bindBidirectional(tou);
+        webEngine = webView.getEngine();
+    }
+
+    private double[] getCoordinates(String address) {
+        if (address.equals("Vienna")) {
+            return new double[]{48.210033, 16.363449};
+        } else if (address.equals("Graz")) {
+            return new double[]{47.070713, 15.439504};
+        } else {
+            throw new IllegalArgumentException("Address not recognized");
+        }
+    }
+
+    private String generateLeafletMap(TourModel tour) {
+        if (selectedTour == null) {
+            return "<html><body><h1>No tour selected</h1></body></html>";
+        }
+        try {
+//            double startLat = Double.parseDouble(selectedTour.getFromProperty().get().split(",")[0]);
+//            double startLng = Double.parseDouble(selectedTour.getFromProperty().get().split(",")[1]);
+//            double endLat = Double.parseDouble(selectedTour.getToProperty().get().split(",")[0]);
+//            double endLng = Double.parseDouble(selectedTour.getToProperty().get().split(",")[1]);
+//            String routeJson = OpenRouteService.getRoute(startLat, startLng, endLat, endLng);
+
+            double[] fromCoords = getCoordinates(tour.getFromProperty().getValue());
+            double[] toCoords = getCoordinates(tour.getToProperty().getValue());
+
+            // Route von OpenRouteService abrufen
+            String routeJson = OpenRouteService.getRoute(fromCoords[0], fromCoords[1], toCoords[0], toCoords[1]);
+
+            return "<!DOCTYPE html>\n" +
+                    "<html lang=\"en\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                    "    <title>Leaflet Map with OpenRouteService</title>\n" +
+                    "    <link rel=\"stylesheet\" href=\"https://unpkg.com/leaflet/dist/leaflet.css\" />\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "    <div id=\"map\" style=\"width: 100%; height: 100%;\"></div>\n" +
+                    "    <script src=\"https://unpkg.com/leaflet/dist/leaflet.js\"></script>\n" +
+                    "    <script>\n" +
+                    "        const map = L.map('map').setView([48.210033, 16.363449], 13);\n" +
+                    "        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n" +
+                    "            maxZoom: 19,\n" +
+                    "        }).addTo(map);\n" +
+                    "        const routeData = " + routeJson + ";\n" +
+                    "        const coordinates = routeData.features[0].geometry.coordinates;\n" +
+                    "        const latlngs = coordinates.map(coord => [coord[1], coord[0]]);\n" +
+                    "        L.polyline(latlngs, { color: 'blue' }).addTo(map);\n" +
+                    "    </script>\n" +
+                    "</body>\n" +
+                    "</html>";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "<html><body><p>Error loading map</p></body></html>";
+        }
     }
 
     @FXML
@@ -106,9 +173,11 @@ public class TourInfoController implements Initializable, Injectable {
             timeField.setText("Time: " + tour.getTimeProperty().getValue());
             routeInformationField.setText("Route information: see map");
 
-            String imagePath = "/org/example/tourplanner/img/" + tour.getRouteInformationProperty().getValue();
-            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
-            tourMap.setImage(image);
+            // Initialize map with tour info
+            if (webEngine != null) {
+                String leafletMap = generateLeafletMap(tour);
+                webEngine.loadContent(leafletMap, "text/html");
+            }
         } else {
             nameField.setText("");
             tourDescriptionField.setText("");
@@ -119,6 +188,10 @@ public class TourInfoController implements Initializable, Injectable {
             timeField.setText("");
             routeInformationField.setText("");
             tourMap.setImage(null);
+
+            if (webEngine != null) {
+                webEngine.loadContent("<html><body><h1>No tour selected</h1></body></html>", "text/html");
+            }
         }
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
     }

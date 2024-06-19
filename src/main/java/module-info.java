@@ -6,6 +6,7 @@ module org.example.tourplanner {
     requires org.hibernate.orm.core;
     requires java.persistence;
     requires java.naming;
+    requires javafx.web;
 
     opens org.example.tourplanner to javafx.fxml;
     exports org.example.tourplanner;
