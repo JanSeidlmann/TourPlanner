@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -15,7 +16,7 @@ public class OpenRouteService implements Injectable {
 
 
     public static String getRoute(double startLat, double startLng, double endLat, double endLng) throws Exception {
-        String urlStr = String.format("%s/%s?api_key=%s&start=%f,%f&end=%f,%f", DIRECTIONS_API_URL, PROFILE, API_KEY, startLng, startLat, endLng, endLat);
+        String urlStr = String.format(Locale.US, "%s/%s?api_key=%s&start=%f,%f&end=%f,%f", DIRECTIONS_API_URL, PROFILE, API_KEY, startLng, startLat, endLng, endLat);
         logger.info("Request URL: " + urlStr);
         System.out.println("Request URL: " + urlStr);
 
