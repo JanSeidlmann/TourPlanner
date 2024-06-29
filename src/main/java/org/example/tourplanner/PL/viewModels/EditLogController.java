@@ -48,12 +48,12 @@ public class EditLogController implements Initializable {
         this.logModel = logModel;
 
         // Set the values of the selected log into the text fields and choice box
-        editDateTimeTextField.setText(logModel.getDateTime().get());
-        editCommentTextField.setText(logModel.getComment().get());
-        editDifficultyTextField.setText(String.valueOf(logModel.getDifficulty().get()));
-        editTotalDistanceTextField.setText(String.valueOf(logModel.getTotalDistance().get()));
-        editTotalTimeTextField.setText(logModel.getTotalTime().get());
-        editRatingChoiceBox.setValue(logModel.getRating().get());
+        editDateTimeTextField.setText(logModel.getDateTimeProperty().get());
+        editCommentTextField.setText(logModel.getCommentProperty().get());
+        editDifficultyTextField.setText(String.valueOf(logModel.getDifficultyProperty().get()));
+        editTotalDistanceTextField.setText(String.valueOf(logModel.getTotalDistanceProperty().get()));
+        editTotalTimeTextField.setText(logModel.getTotalTimeProperty().get());
+        editRatingChoiceBox.setValue(logModel.getRatingProperty().get());
     }
 
     @FXML
@@ -88,12 +88,12 @@ public class EditLogController implements Initializable {
             }
 
             // Update the values of the selected log
-            logModel.getDateTime().set(dateTime);
-            logModel.getComment().set(comment);
-            logModel.getDifficulty().set(difficulty);
-            logModel.getTotalDistance().set(totalDistance);
-            logModel.getTotalTime().set(totalTime);
-            logModel.getRating().set(rating);
+            logModel.getDateTimeProperty().set(dateTime);
+            logModel.getCommentProperty().set(comment);
+            logModel.getDifficultyProperty().set(difficulty);
+            logModel.getTotalDistanceProperty().set(totalDistance);
+            logModel.getTotalTimeProperty().set(totalTime);
+            logModel.getRatingProperty().set(rating);
 
             closeStage();
         }

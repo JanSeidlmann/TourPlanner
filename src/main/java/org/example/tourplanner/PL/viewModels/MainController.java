@@ -11,11 +11,14 @@ import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
 import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.DAL.repositories.TourDAO;
+import org.example.tourplanner.DAL.repositories.LogDAO;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Getter
@@ -38,9 +41,14 @@ public class MainController implements Initializable, Injectable {
     private LogController logController;
 
     private static MainController instance;
-    private final ObservableList<TourModel> tours = FXCollections.observableArrayList();
+    private final TourDAO tourDAO = new TourDAO();
+    private final LogDAO logDAO = new LogDAO();
+
+    private final List<TourModel> initialTours = tourDAO.findALl();
+    private final ObservableList<TourModel> tours = FXCollections.observableArrayList(initialTours);
     private final ObservableList<String> tourNames = FXCollections.observableArrayList();
-    //private final ObservableList<LogModel> logs = FXCollections.observableArrayList();
+    private final List<LogModel> initialLogs = logDAO.findALl();
+    private final ObservableList<LogModel> logs = FXCollections.observableArrayList(initialLogs);
     private final ObservableList<String> logNames = FXCollections.observableArrayList();
 
     private TourModel selectedTour;

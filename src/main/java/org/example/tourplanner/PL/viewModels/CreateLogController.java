@@ -44,12 +44,16 @@ public class CreateLogController implements Initializable {
         ratingChoiceBox.getItems().setAll(1, 2, 3, 4, 5);
 
         LogModel newLog = new LogModel();
-        dateTimeTextField.textProperty().bindBidirectional(newLog.getDateTime());
-        commentTextField.textProperty().bindBidirectional(newLog.getComment());
-        difficultyTextField.textProperty().bindBidirectional(newLog.getDifficulty(), new NumberStringConverter());
-        totalDistanceTextField.textProperty().bindBidirectional(newLog.getTotalDistance(), new NumberStringConverter());
-        totalTimeTextField.textProperty().bindBidirectional(newLog.getTotalTime());
-        ratingChoiceBox.valueProperty().bindBidirectional(newLog.getRating().asObject());
+        bindProperties(newLog);
+    }
+
+    private void bindProperties(LogModel log) {
+        dateTimeTextField.textProperty().bindBidirectional(log.getDateTimeProperty());
+        commentTextField.textProperty().bindBidirectional(log.getCommentProperty());
+        difficultyTextField.textProperty().bindBidirectional(log.getDifficultyProperty(), new NumberStringConverter());
+        totalDistanceTextField.textProperty().bindBidirectional(log.getTotalDistanceProperty(), new NumberStringConverter());
+        totalTimeTextField.textProperty().bindBidirectional(log.getTotalTimeProperty());
+        ratingChoiceBox.valueProperty().bindBidirectional(log.getRatingProperty().asObject());
     }
 
     @FXML
@@ -102,7 +106,8 @@ public class CreateLogController implements Initializable {
                 difficulty,
                 totalDistance,
                 totalTimeTextField.getText(),
-                logRating
+                logRating,
+                mainController.getSelectedTour()
         );
         mainController.addLog(log);
         mainController.switchToLogsTab();

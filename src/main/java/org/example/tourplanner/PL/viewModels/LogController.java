@@ -77,12 +77,12 @@ public class LogController implements Initializable, Injectable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainController = MainController.getInstance();
 
-        dateTimeColumn.setCellValueFactory(data -> data.getValue().getDateTime());
-        commentColumn.setCellValueFactory(data -> data.getValue().getComment());
-        difficultyColumn.setCellValueFactory(data -> data.getValue().getDifficulty().asObject());
-        totalDistanceColumn.setCellValueFactory(data -> data.getValue().getTotalDistance().asObject());
-        totalTimeColumn.setCellValueFactory(data -> data.getValue().getTotalTime());
-        ratingColumn.setCellValueFactory(data -> data.getValue().getRating().asObject());
+        dateTimeColumn.setCellValueFactory(data -> data.getValue().getDateTimeProperty());
+        commentColumn.setCellValueFactory(data -> data.getValue().getCommentProperty());
+        difficultyColumn.setCellValueFactory(data -> data.getValue().getDifficultyProperty().asObject());
+        totalDistanceColumn.setCellValueFactory(data -> data.getValue().getTotalDistanceProperty().asObject());
+        totalTimeColumn.setCellValueFactory(data -> data.getValue().getTotalTimeProperty());
+        ratingColumn.setCellValueFactory(data -> data.getValue().getRatingProperty().asObject());
 
         logTableView.setItems(mainController.getLogs());
         selectedTour.setText("Selected tour: " + mainController.getSelectedTourName());

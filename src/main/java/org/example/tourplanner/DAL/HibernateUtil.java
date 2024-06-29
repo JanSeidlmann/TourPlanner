@@ -1,6 +1,7 @@
 package org.example.tourplanner.DAL;
 
 import lombok.Getter;
+import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.BL.models.TourModel;
 import org.hibernate.*;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -18,6 +19,7 @@ public class HibernateUtil {
                     .applySettings(configuration.getProperties());
             //Entitäten explizit hinzufügen
             configuration.addAnnotatedClass(TourModel.class);
+            configuration.addAnnotatedClass(LogModel.class);
 
             sessionFactory = configuration.buildSessionFactory(builder.build());
             System.out.println("Hibernate-Konfiguration erfolgreich geladen");
