@@ -15,7 +15,7 @@ public class TourService implements ITourService, Injectable {
     }
 
     @Override
-    public List<TourModel> getAllUsers(){
+    public List<TourModel> getAllTours(){
         return tourDAO.findALl();
     }
 

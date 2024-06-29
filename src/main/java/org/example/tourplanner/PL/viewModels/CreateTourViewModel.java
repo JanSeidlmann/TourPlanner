@@ -23,7 +23,7 @@ public class CreateTourViewModel implements Injectable {
 
     private void loadTours() {
         tourTableList.clear();
-        var validUserModels = tourService.getAllUsers();
+        var validUserModels = tourService.getAllTours();
         tourTableList.addAll(validUserModels);
     }
 
