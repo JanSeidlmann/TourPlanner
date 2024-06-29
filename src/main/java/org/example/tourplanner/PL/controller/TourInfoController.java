@@ -1,4 +1,4 @@
-package org.example.tourplanner.PL.viewModels;
+package org.example.tourplanner.PL.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -15,14 +14,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
 import org.example.tourplanner.BL.models.TourModel;
-import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
 import org.example.tourplanner.OpenRouteService;
 import org.example.tourplanner.TourPlannerApplication;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TourInfoController implements Initializable, Injectable {

@@ -1,4 +1,4 @@
-package org.example.tourplanner.PL.viewModels;
+package org.example.tourplanner.PL.viewmodels;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

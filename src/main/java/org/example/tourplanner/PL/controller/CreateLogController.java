@@ -1,4 +1,4 @@
-package org.example.tourplanner.PL.viewModels;
+package org.example.tourplanner.PL.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.DefaultInjector;
+import org.example.tourplanner.PL.viewmodels.CreateLogViewModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -1,4 +1,4 @@
-package org.example.tourplanner.PL.viewModels;
+package org.example.tourplanner.PL.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +15,8 @@ import org.example.tourplanner.DAL.repositories.TourDAO;
 import org.example.tourplanner.DAL.repositories.LogDAO;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
+import org.example.tourplanner.PL.viewmodels.CreateLogViewModel;
+import org.example.tourplanner.PL.viewmodels.CreateTourViewModel;
 
 import java.io.IOException;
 import java.net.URL;

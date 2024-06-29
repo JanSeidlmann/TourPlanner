@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.example.tourplanner.PL.viewModels.MainController;
+import org.example.tourplanner.PL.controller.MainController;
 
 import java.io.IOException;
 

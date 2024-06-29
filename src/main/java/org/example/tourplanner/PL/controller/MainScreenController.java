@@ -1,4 +1,4 @@
-package org.example.tourplanner.PL.viewModels;
+package org.example.tourplanner.PL.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
