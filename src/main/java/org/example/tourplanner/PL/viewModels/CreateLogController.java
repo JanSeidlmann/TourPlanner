@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import org.example.tourplanner.BL.models.LogModel;
+import org.example.tourplanner.DefaultInjector;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,7 +37,13 @@ public class CreateLogController implements Initializable {
     @FXML
     private ChoiceBox<Integer> ratingChoiceBox;
 
+    private final CreateLogViewModel createLogViewModel;
+
     private MainController mainController;
+
+    public CreateLogController() {
+        this.createLogViewModel = DefaultInjector.getService(CreateLogViewModel.class);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,7 +116,7 @@ public class CreateLogController implements Initializable {
                 logRating,
                 mainController.getSelectedTour()
         );
-        mainController.addLog(log);
+        createLogViewModel.addLog(log);
         mainController.switchToLogsTab();
         closeStage();
     }

@@ -3,10 +3,8 @@ package org.example.tourplanner.PL.viewModels;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
-import lombok.extern.java.Log;
 import org.example.tourplanner.BL.ILogService;
 import org.example.tourplanner.BL.LogService;
-import org.example.tourplanner.BL.TourService;
 import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
@@ -15,26 +13,26 @@ public class CreateLogViewModel implements Injectable {
     private final ILogService logService;
 
     @Getter
-    private ObservableList<LogModel> logTableList;
+    private ObservableList<LogModel> logTableView;
 
-    public CreateLogViewModel(ILogService logService) {
+    public CreateLogViewModel() {
         this.logService = DefaultInjector.getService(LogService.class);
-        this.logTableList = FXCollections.observableArrayList();
+        this.logTableView = FXCollections.observableArrayList();
         loadLogs();
     }
 
     private void loadLogs() {
-        logTableList.clear();
+        logTableView.clear();
         var validLogModels = logService.getAllLogs();
-        logTableList.addAll(validLogModels);
+        logTableView.addAll(validLogModels);
     }
 
-    private void addLog(LogModel log) {
+    public void addLog(LogModel log) {
         logService.addLog(log);
         loadLogs();
     }
 
-    private void deleteLog(LogModel log) {
+    public void deleteLog(LogModel log) {
         logService.deleteLog(log);
         loadLogs();
     }

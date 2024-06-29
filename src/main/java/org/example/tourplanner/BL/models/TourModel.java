@@ -20,6 +20,7 @@ import java.util.Objects;
 @Table(name = "tourmodels")
 public class TourModel {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -57,8 +58,6 @@ public class TourModel {
     private StringProperty timeProperty;
     @Transient
     private StringProperty routeInformationProperty;
-    @Transient
-    private ObservableList<LogModel> logs;
 
     public TourModel() {
         initProperties();
@@ -85,7 +84,6 @@ public class TourModel {
         this.distanceProperty = new SimpleFloatProperty(this.distance != null ? this.distance : 0.0f);
         this.timeProperty = new SimpleStringProperty(this.time);
         this.routeInformationProperty = new SimpleStringProperty(this.routeInformation);
-        this.logs = FXCollections.observableArrayList();
     }
 
     @PostLoad
@@ -113,14 +111,6 @@ public class TourModel {
         this.distance = this.distanceProperty.get();
         this.time = this.timeProperty.get();
         this.routeInformation = this.routeInformationProperty.get();
-    }
-
-    public void addLog(LogModel log) {
-        this.logs.add(log);
-    }
-
-    public void removeLog(LogModel log) {
-        this.logs.remove(log);
     }
 
     @Override

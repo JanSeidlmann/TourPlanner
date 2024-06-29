@@ -1,6 +1,7 @@
 package org.example.tourplanner.BL;
 
 import org.example.tourplanner.BL.models.LogModel;
+import org.example.tourplanner.BL.models.TourModel;
 import org.example.tourplanner.DAL.repositories.LogDAO;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
@@ -17,6 +18,11 @@ public class LogService implements ILogService, Injectable {
     @Override
     public List<LogModel> getAllLogs() {
         return logDAO.findALl();
+    }
+
+    @Override
+    public List<LogModel> getLogs(TourModel tour) {
+        return logDAO.findByTour(tour);
     }
 
     @Override

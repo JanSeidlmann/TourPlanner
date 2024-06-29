@@ -44,22 +44,23 @@ public class MainController implements Initializable, Injectable {
     private final TourDAO tourDAO = new TourDAO();
     private final LogDAO logDAO = new LogDAO();
 
-    private final List<TourModel> initialTours = tourDAO.findALl();
+    private final List<TourModel> initialTours = tourDAO.findAll();
     private final ObservableList<TourModel> tours = FXCollections.observableArrayList(initialTours);
     private final ObservableList<String> tourNames = FXCollections.observableArrayList();
     private final List<LogModel> initialLogs = logDAO.findALl();
-    private final ObservableList<LogModel> logs = FXCollections.observableArrayList(initialLogs);
-    private final ObservableList<String> logNames = FXCollections.observableArrayList();
+    private ObservableList<LogModel> logs = FXCollections.observableArrayList(initialLogs);
 
     private TourModel selectedTour;
     private LogModel selectedLog;
     private final CreateTourViewModel createTourViewModel;
+    private final CreateLogViewModel createLogViewModel;
 
     public MainController(){
         this.allToursController = DefaultInjector.getService(AllToursController.class);
         this.tourInfoController = DefaultInjector.getService(TourInfoController.class);
         this.logController = DefaultInjector.getService(LogController.class);
         this.createTourViewModel = DefaultInjector.getService(CreateTourViewModel.class);
+        this.createLogViewModel = DefaultInjector.getService(CreateLogViewModel.class);
         instance = this;
     }
 
@@ -121,6 +122,7 @@ public class MainController implements Initializable, Injectable {
         if (tourInfoController != null) {
             tourInfoController.setSelectedTour(selectedTour);
             tourInfoController.setTourInfo(selectedTour);
+            this.logs = FXCollections.observableArrayList(logDAO.findByTour(selectedTour));
             logController.setLogsOfTour();
             tabPane.getSelectionModel().select(tourInfoTab);
         } else {
@@ -173,26 +175,9 @@ public class MainController implements Initializable, Injectable {
         }
     }
 
-    public ObservableList<LogModel> getLogs() {
-        if (selectedTour != null) {
-            return selectedTour.getLogs();
-        } else {
-            return null;
-        }
-    }
-
-    public void addLog(LogModel log) {
-        selectedTour.addLog(log);
-    }
-
     public void removeLog(LogModel log) {
-        selectedTour.removeLog(log);
         logController.setLogsOfTour();
+        createLogViewModel.deleteLog(log);
     }
-
-    public void addLogName(String logName) {
-        tourNames.add(logName);
-    }
-
 
 }

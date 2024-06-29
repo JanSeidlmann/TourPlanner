@@ -15,7 +15,7 @@ public class TourDAO extends BaseDAO<TourModel> {
         }
     }
 
-    public List<TourModel> findALl(){
+    public List<TourModel> findAll(){
         try(Session session = getSession()){
             return session.createQuery("FROM TourModel", TourModel.class).list();
         }
