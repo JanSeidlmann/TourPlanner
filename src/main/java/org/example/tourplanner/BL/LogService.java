@@ -5,11 +5,18 @@ import org.example.tourplanner.DAL.repositories.LogDAO;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
 
+import java.util.List;
+
 public class LogService implements ILogService, Injectable {
     private final LogDAO logDAO;
 
     public LogService() {
         this.logDAO = DefaultInjector.getService(LogDAO.class);
+    }
+
+    @Override
+    public List<LogModel> getAllLogs() {
+        return logDAO.findALl();
     }
 
     @Override
