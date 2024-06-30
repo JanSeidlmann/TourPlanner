@@ -1,5 +1,6 @@
 package org.example.tourplanner.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.models.TourModel;
 import org.example.tourplanner.Injectable;
 import org.example.tourplanner.config.ApplicationContext;
@@ -12,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // created with the help of team5 - https://github.com/helhar1234/TourPlanner_SWEN2_Team5
+@Slf4j
 public class OpenRouteService implements Injectable {
     private static final String API_URL_GEOCODE = "https://api.openrouteservice.org/geocode/search?api_key=%s&text=%s";
     private static final String API_URL_DIRECTIONS = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=%s&start=%s&end=%s";
@@ -29,7 +31,7 @@ public class OpenRouteService implements Injectable {
 
         int responseCode = conn.getResponseCode();
         if (responseCode != 200) {
-            // log error "responseCode = " + responseCode
+            log.error("[responseCode:" + responseCode + "] for [url:" + urlStr + "].");
             return null;
         }
 
@@ -43,11 +45,10 @@ public class OpenRouteService implements Injectable {
             double lon = coordinates.getDouble(0);
             double lat = coordinates.getDouble(1);
 
-            // log info
+            log.info("Success retrieving geocode for location [name:" + location + "].");
             return lon + "," + lat;
         }
-
-        // log error
+        log.error("Could not retrieve geocode for location [name:" + location + "].");
         return null;
     }
 
@@ -67,13 +68,13 @@ public class OpenRouteService implements Injectable {
 
             int responseCode = conn.getResponseCode();
             if (responseCode != 200) {
-                // log error "responseCode = " + responseCode
+                log.error("[responseCode:" + responseCode + "] for [url:" + urlStr + "].");
                 throw new IOException("Error while trying to fetch route data");
             }
             return new String(conn.getInputStream().readAllBytes());
 
         } catch (Exception e) {
-            // log error
+            log.error("An error occurred while fetching the routeData for tour [id:" + tour.getId() + "], error : " + e);
             return null;
         }
     }

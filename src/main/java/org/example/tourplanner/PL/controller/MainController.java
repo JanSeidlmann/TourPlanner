@@ -9,6 +9,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.BL.models.TourModel;
 import org.example.tourplanner.DAL.repositories.TourDAO;
@@ -23,6 +24,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+@Slf4j
 @Getter
 public class MainController implements Initializable, Injectable {
 
@@ -93,7 +95,7 @@ public class MainController implements Initializable, Injectable {
             tourInfoTab.setContent(tourInfoContent);
             tourInfoController = loader.getController();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("An error occurred while loading TourInfoView, error: " + e);
         }
     }
 
@@ -104,7 +106,7 @@ public class MainController implements Initializable, Injectable {
             logsTab.setContent(logsContent);
             logController = loader.getController();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("An error occurred while loading LogView, error: " + e);
         }
     }
 
@@ -128,7 +130,7 @@ public class MainController implements Initializable, Injectable {
             logController.setLogsOfTour();
             tabPane.getSelectionModel().select(tourInfoTab);
         } else {
-            System.out.println("tourInfoController is null!");
+            log.error("TourInfoController is null.");
         }
     }
 
@@ -137,7 +139,7 @@ public class MainController implements Initializable, Injectable {
             logController.setLogsOfTour();
             tabPane.getSelectionModel().select(logsTab);
         } else {
-            System.out.println("logController is null");
+            log.error("LogController is null.");
         }
     }
 
@@ -173,6 +175,7 @@ public class MainController implements Initializable, Injectable {
         if (selectedTour != null) {
             return selectedTour.getNameProperty().getValue();
         } else {
+            log.warn("SelectedTour is null.");
             return "null";
         }
     }

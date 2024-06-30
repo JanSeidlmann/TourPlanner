@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.Injectable;
 import org.example.tourplanner.TourPlannerApplication;
 import org.example.tourplanner.BL.models.LogModel;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class LogController implements Initializable, Injectable {
 
     @FXML
@@ -61,10 +63,11 @@ public class LogController implements Initializable, Injectable {
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Edit Tour");
+            stage.setTitle("Edit Log");
             stage.setScene(new Scene(root));
             stage.showAndWait();
         } else {
+            log.warn("No log selected for editing.");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText(null);

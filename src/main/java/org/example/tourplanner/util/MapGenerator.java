@@ -1,5 +1,6 @@
 package org.example.tourplanner.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.models.TourModel;
 import org.example.tourplanner.TourPlannerApplication;
 import org.example.tourplanner.config.ApplicationContext;
@@ -13,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 // created with the help of team5 - https://github.com/helhar1234/TourPlanner_SWEN2_Team5
+@Slf4j
 public class MapGenerator {
 
 
@@ -27,7 +29,7 @@ public class MapGenerator {
         String end = OpenRouteService.getGeocode(tour.getTo());
 
         if (start == null || end == null) {
-            // log.warn("Failed to find start/destination coordinates");
+            log.warn("Failed to find start/destination coordinates [from:" + tour.getFrom() + "], [to:" + tour.getTo() +"].");
             throw new IOException("Invalid coordinates");
         }
 
@@ -43,7 +45,7 @@ public class MapGenerator {
 
             int responseCode = conn.getResponseCode();
             if (responseCode != 200) {
-                // log error "responseCode = " + responseCode
+                log.error("[responseCode:" + responseCode + "] for [url:" + urlStr + "].");
                 throw new IOException("Error while trying to fetch  image");
             }
 
@@ -53,10 +55,10 @@ public class MapGenerator {
             File mapFile = new File(MAP_DIR, filename);
             ImageIO.write(image, "png", mapFile);
 
-            // log info success
+            log.info("Success fetching map image.");
             return filename;
         } catch (Exception e) {
-            // log error
+            log.error("An error occurred while fetching the map image for tour [id:" + tour.getId() + "], error : " + e);
             return null;
         }
     }
@@ -67,15 +69,15 @@ public class MapGenerator {
 
             try (FileWriter fileWriter = new FileWriter(DIRECTIONS)) {
                 fileWriter.write("var directions = " + routeData + ";");
-                // log info success
+                log.info("Success writing directions to file.");
             } catch (IOException e) {
-                // log error
+                log.error("An error occurred while trying to write directions to file for tour [id:" + tour.getId() + "], error : " + e);
             }
 
             TourPlannerApplication.openTourMapInBrowser();
-            // log info success;
+            log.info("Success opening map in browser.");
         } catch (Exception e) {
-            // log error
+            log.error("An error occurred while trying to open map in browser for tour [id:" + tour.getId() + "], error : " + e);
         }
     }
 }

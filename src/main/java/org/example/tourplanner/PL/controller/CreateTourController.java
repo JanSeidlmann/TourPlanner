@@ -8,6 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.models.TourModel;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.PL.viewmodels.CreateTourViewModel;
@@ -92,16 +93,6 @@ public class CreateTourController implements Initializable {
                 timeTextField.getText(),
                 routeInformationTextField.getText()
         );
-
-        // Logge die Werte vor dem Speichern
-        System.out.println("Tour Name: " + tour.getName());
-        System.out.println("Description: " + tour.getTourDescription());
-        System.out.println("From: " + tour.getFrom());
-        System.out.println("To: " + tour.getTo());
-        System.out.println("Transport Type: " + tour.getTransportType());
-        System.out.println("Distance: " + tour.getDistance());
-        System.out.println("Time: " + tour.getTime());
-        System.out.println("Route Information: " + tour.getRouteInformation());
 
         mainController.addTourName(tour.getName());
         mainController.addTour(tour);

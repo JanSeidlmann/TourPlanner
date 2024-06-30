@@ -8,6 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.PL.viewmodels.CreateLogViewModel;
@@ -15,6 +16,7 @@ import org.example.tourplanner.PL.viewmodels.CreateLogViewModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class CreateLogController implements Initializable {
 
     @FXML
@@ -91,6 +93,7 @@ public class CreateLogController implements Initializable {
             difficulty = Integer.parseInt(difficultyText);
         } catch (NumberFormatException e) {
             showAlert("Invalid difficulty input.");
+            log.warn("Invalid difficulty input: " + difficultyText);
             return;
         }
 
@@ -98,6 +101,7 @@ public class CreateLogController implements Initializable {
             totalDistance = Float.parseFloat(totalDistanceText);
         } catch (NumberFormatException e) {
             showAlert("Invalid distance input.");
+            log.warn("Invalid distance input: " + totalDistanceText);
             return;
         }
 
@@ -105,6 +109,7 @@ public class CreateLogController implements Initializable {
             logRating = Integer.parseInt(rating);
         } catch (NumberFormatException e) {
             showAlert("Invalid rating input.");
+            log.warn("Invalid rating input: " + rating);
             return;
         }
 

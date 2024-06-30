@@ -7,11 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.models.TourModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class EditTourController implements Initializable {
 
     @FXML
@@ -89,6 +91,7 @@ public class EditTourController implements Initializable {
                 distance = Float.parseFloat(distanceText);
             } catch (NumberFormatException e) {
                 showAlert("Invalid distance input.");
+                log.warn("Invalid distance input: " + distanceText);
                 return;
             }
 
@@ -107,6 +110,8 @@ public class EditTourController implements Initializable {
             viewModel.updateSelectedTour(tourModel);
 
             closeStage();
+        } else {
+            log.warn("TourModel is null");
         }
     }
 

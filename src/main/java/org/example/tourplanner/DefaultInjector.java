@@ -1,8 +1,11 @@
 package org.example.tourplanner;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class DefaultInjector {
     //map, die Klassen (als Schlüssel) den Instanzen der Klassen (als Werte) zuordnet.
     private static final Map<Class<? extends Injectable>, Injectable> services = new HashMap<>();
@@ -21,8 +24,8 @@ public class DefaultInjector {
                 //die neu erstellte Instanz wird registriert
                 registerService(serviceClass, serviceInstance);
             } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException("couldnt create instance of: " + serviceClass.getName());
+                log.error("Couldn't create instance of: " + serviceClass.getName() + ", error: " + e);
+                throw new RuntimeException("Couldn't create instance of: " + serviceClass.getName());
             }
         }
         //die registrierte Instanz zurückgeben

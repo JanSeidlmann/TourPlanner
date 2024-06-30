@@ -7,11 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.models.LogModel;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class EditLogController implements Initializable {
 
     @FXML
@@ -77,6 +79,7 @@ public class EditLogController implements Initializable {
                 difficulty = Integer.parseInt(difficultyText);
             } catch (NumberFormatException e) {
                 showAlert("Invalid difficulty input.");
+                log.warn("Invalid difficulty input: " + difficultyText);
                 return;
             }
 
@@ -84,6 +87,7 @@ public class EditLogController implements Initializable {
                 totalDistance = Float.parseFloat(totalDistanceText);
             } catch (NumberFormatException e) {
                 showAlert("Invalid distance input.");
+                log.warn("Invalid distance input: " + totalDistanceText);
                 return;
             }
 

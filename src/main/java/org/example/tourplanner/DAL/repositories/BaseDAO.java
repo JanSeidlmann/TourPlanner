@@ -1,10 +1,12 @@
 package org.example.tourplanner.DAL.repositories;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.DAL.HibernateUtil;
 import org.example.tourplanner.Injectable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Slf4j
 public abstract class BaseDAO<T> implements Injectable {
     protected Session getSession() {
         return HibernateUtil.getSessionFactory().openSession();
@@ -21,7 +23,7 @@ public abstract class BaseDAO<T> implements Injectable {
                 transaction.rollback();
                 ;
             }
-            e.printStackTrace();
+            log.error("Unable to save entity of Type " + entity.getClass() + ", an exception occurred: " + e);
         }
     }
 
@@ -36,7 +38,7 @@ public abstract class BaseDAO<T> implements Injectable {
                 transaction.rollback();
                 ;
             }
-            e.printStackTrace();
+            log.error("Unable to delete entity of Type " + entity.getClass() + ", an exception occurred: " + e);
         }
     }
 }

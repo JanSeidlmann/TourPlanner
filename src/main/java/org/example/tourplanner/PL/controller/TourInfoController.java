@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.IPDFService;
 import org.example.tourplanner.BL.PDFService;
 import org.example.tourplanner.BL.models.TourModel;
@@ -29,6 +30,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class TourInfoController implements Initializable, Injectable {
 
     @FXML
@@ -57,8 +59,6 @@ public class TourInfoController implements Initializable, Injectable {
 
     private IPDFService pdfService;
 
-    private TourDAO tourDAO;
-
     private MainController mainController;
 
     @Override
@@ -66,7 +66,6 @@ public class TourInfoController implements Initializable, Injectable {
         mainController = MainController.getInstance();
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
         this.pdfService = DefaultInjector.getService(PDFService.class);
-        this.tourDAO = DefaultInjector.getService(TourDAO.class);
     }
 
     @FXML
@@ -84,6 +83,7 @@ public class TourInfoController implements Initializable, Injectable {
             stage.setScene(new Scene(root));
             stage.showAndWait();
         } else {
+            log.warn("No tour selected for editing.");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText(null);
@@ -136,7 +136,7 @@ public class TourInfoController implements Initializable, Injectable {
                 tourMap.setImage(mapImage);
                 tourMap.setOnMouseClicked(event -> MapGenerator.openTourMapInBrowser(tour));
             } catch (IOException e) {
-                // log error
+                log.error("An error occurred while setting the tourMap, error: " + e);
             }
         } else {
             nameField.setText("");
@@ -155,9 +155,9 @@ public class TourInfoController implements Initializable, Injectable {
     public void generatePDF(ActionEvent actionEvent) {
         try{
             pdfService.createUserListPDF("TourList.pdf", selectedTour);
-            System.out.println("PDF generated successfully.");
+            log.info("PDF of tour [id:" + selectedTour.getId() + "] generated successfully.");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("An error occurred while generating PDF of tour [id:" + selectedTour.getId() + "], error: " + e);
             throw new RuntimeException(e);
         }
     }
@@ -168,9 +168,9 @@ public class TourInfoController implements Initializable, Injectable {
 
         try {
             exportTourToCsv(selectedTour, file);
-            System.out.println("Tour erfolgreich exportiert nach " + file.getAbsolutePath());
+            log.info("Tour [id:" + selectedTour.getId() + "] exported to [path:" + file.getAbsolutePath() + "]");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("An error occurred while exporting tour [id:" + selectedTour.getId() + "], error: " + e);
         }
     }
 
@@ -184,8 +184,6 @@ public class TourInfoController implements Initializable, Injectable {
                         + selectedTour.getTransportType() + "," + selectedTour.getDistance() + ","
                         + selectedTour.getTime() + "," + selectedTour.getRouteInformation());
             }
-        } catch (IOException e) {
-            throw e;
         }
     }
 }

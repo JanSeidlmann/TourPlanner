@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.ITourService;
 import org.example.tourplanner.BL.TourService;
 import org.example.tourplanner.BL.models.TourModel;
@@ -30,6 +31,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class AllToursController implements Initializable, Injectable {
 
     @FXML
@@ -93,7 +95,7 @@ public class AllToursController implements Initializable, Injectable {
             if (selectedTour != null) {
                 mainController.switchToTourInfoTab(selectedTour);
             } else {
-                System.out.println("No tour selected.");
+                log.warn("No tour selected.");
             }
         }
     }
@@ -119,7 +121,6 @@ public class AllToursController implements Initializable, Injectable {
         stage.showAndWait(); // Zeigt das Fenster und wartet, bis es geschlossen wird
 
         updateTourList();
-
     }
 
     @FXML
@@ -136,7 +137,7 @@ public class AllToursController implements Initializable, Injectable {
                 importTourFromCsv(selectedFile);
                 System.out.println("Tour erfolgreich importiert aus " + selectedFile.getAbsolutePath());
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Error importing tour from CSV file");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
@@ -172,8 +173,6 @@ public class AllToursController implements Initializable, Injectable {
             }
 
             tourTableView.setItems(tourList);
-        } catch (IOException e) {
-            throw e;
         }
     }
 }
