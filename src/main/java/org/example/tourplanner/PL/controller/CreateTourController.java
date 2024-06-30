@@ -19,31 +19,34 @@ import java.util.ResourceBundle;
 public class CreateTourController implements Initializable {
 
     @FXML
-    private Button createButton;
+    public Button createButton;
 
     @FXML
-    private TextField descriptionTextField;
+    public Button cancelButton;
 
     @FXML
-    private TextField distanceTextField;
+    public TextField descriptionTextField;
 
     @FXML
-    private TextField fromTextField;
+    public TextField distanceTextField;
 
     @FXML
-    private TextField nameTextField;
+    public TextField fromTextField;
 
     @FXML
-    private TextField routeInformationTextField;
+    public TextField nameTextField;
 
     @FXML
-    private TextField timeTextField;
+    public TextField routeInformationTextField;
 
     @FXML
-    private TextField toTextField;
+    public TextField timeTextField;
 
     @FXML
-    private ChoiceBox<String> transportType;
+    public TextField toTextField;
+
+    @FXML
+    public ChoiceBox<String> transportType;
 
     private final CreateTourViewModel createTourViewModel;
 
@@ -62,7 +65,7 @@ public class CreateTourController implements Initializable {
         bindProperties(newTour);
     }
 
-    private void bindProperties(TourModel tour) {
+    public void bindProperties(TourModel tour) {
         nameTextField.textProperty().bindBidirectional(tour.getNameProperty());
         descriptionTextField.textProperty().bindBidirectional(tour.getTourDescriptionProperty());
         fromTextField.textProperty().bindBidirectional(tour.getFromProperty());

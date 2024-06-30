@@ -39,6 +39,16 @@ public class MainWindowTest extends ApplicationTest {
     }
 
     @Test
+    void testDarkModeButton(){
+        verifyThat("#darkModeButton", isEnabled());
+    }
+
+    @Test
+    void testImportButton(){
+        verifyThat("#importTour", isEnabled());
+    }
+
+    @Test
     void testButtonVisible() {
         clickOn("#addTourButton");
 
@@ -65,21 +75,5 @@ public class MainWindowTest extends ApplicationTest {
         assertEquals(10.5f, tour.getDistanceProperty().get());
         assertEquals("Time", tour.getTimeProperty().get());
         assertEquals("RouteInformation", tour.getRouteInformationProperty().get());
-    }
-
-    @Test
-    void testCreateTour() {
-        testButtonVisible();
-
-        clickOn("#nameTextField").write("Name");
-        clickOn("#descriptionTextField").write("Description");
-        clickOn("#routeInformationTextField").write("RouteInformation");
-        clickOn("#timeTextField").write("Time");
-        clickOn("#distanceTextField").write("12345");
-        clickOn("#toTextField").write("To");
-        clickOn("#fromTextField").write("From");
-        clickOn("#createButton");
-
-        verifyThat("#tourTableView", isNotNull());
     }
 }

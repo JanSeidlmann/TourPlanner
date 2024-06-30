@@ -160,7 +160,7 @@ public class TourInfoController implements Initializable, Injectable {
     @FXML
     public void generatePDF(ActionEvent actionEvent) {
         try{
-            pdfService.createUserListPDF("TourList.pdf", selectedTour);
+            pdfService.createTourListPDF("TourList.pdf", selectedTour);
             log.info("PDF of tour [id:" + selectedTour.getId() + "] generated successfully.");
         } catch (Exception e) {
             log.error("An error occurred while generating PDF of tour [id:" + selectedTour.getId() + "], error: " + e);

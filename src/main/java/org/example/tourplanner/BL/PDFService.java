@@ -25,7 +25,7 @@ public class PDFService implements IPDFService, Injectable {
     }
 
     @Override
-    public void createUserListPDF(String filePath, TourModel tour) throws Exception {
+    public void createTourListPDF(String filePath, TourModel tour) throws Exception {
         try (PdfWriter writer = new PdfWriter(filePath);
              PdfDocument pdfDoc = new PdfDocument(writer);
              Document document = new Document(pdfDoc)) {
