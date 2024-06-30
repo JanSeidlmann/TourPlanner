@@ -25,34 +25,34 @@ public class LogController implements Initializable, Injectable {
     public TableView<LogModel> logTableView;
 
     @FXML
-    private TableColumn<LogModel, String> dateTimeColumn;
+    public TableColumn<LogModel, String> dateTimeColumn;
     @FXML
-    private TableColumn<LogModel, String> commentColumn;
+    public TableColumn<LogModel, String> commentColumn;
     @FXML
-    private TableColumn<LogModel, Integer> difficultyColumn;
+    public TableColumn<LogModel, Integer> difficultyColumn;
     @FXML
-    private TableColumn<LogModel, Float> totalDistanceColumn;
+    public TableColumn<LogModel, Float> totalDistanceColumn;
     @FXML
-    private TableColumn<LogModel, String> totalTimeColumn;
+    public TableColumn<LogModel, String> totalTimeColumn;
     @FXML
-    private TableColumn<LogModel, Integer> ratingColumn;
+    public TableColumn<LogModel, Integer> ratingColumn;
 
     @FXML
-    private Label selectedTour;
+    public Label selectedTour;
     @FXML
     private Button editLogBnt;
     @FXML
     private Button deleteLogBnt;
 
-    private MainController mainController;
+    public MainController mainController;
 
     @FXML
-    private void deleteLog(ActionEvent actionEvent) {
+    public void deleteLog(ActionEvent actionEvent) {
         LogModel selectedLog = logTableView.getSelectionModel().getSelectedItem();
         mainController.removeLog(selectedLog);
     }
     @FXML
-    private void editLog(ActionEvent actionEvent) throws IOException {
+    public void editLog(ActionEvent actionEvent) throws IOException {
         LogModel selectedLog = logTableView.getSelectionModel().getSelectedItem();
         if (selectedLog != null) {
             FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("/org/example/tourplanner/editLog.fxml"));

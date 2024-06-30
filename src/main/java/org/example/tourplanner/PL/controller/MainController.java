@@ -223,4 +223,10 @@ public class MainController implements Initializable, Injectable {
         }
         TourPlannerApplication.enableDarkMode(isDarkMode);
     }
+
+    public void editLog(Object any) {
+    }
+
+    public void addLog(LogModel logModel) {
+    }
 }
