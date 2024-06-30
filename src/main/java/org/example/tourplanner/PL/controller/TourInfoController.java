@@ -12,14 +12,20 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
+import org.example.tourplanner.BL.IPDFService;
+import org.example.tourplanner.BL.PDFService;
 import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.DAL.repositories.TourDAO;
+import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
 import org.example.tourplanner.util.OpenRouteService;
 import org.example.tourplanner.TourPlannerApplication;
 import org.example.tourplanner.util.MapGenerator;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,73 +55,18 @@ public class TourInfoController implements Initializable, Injectable {
     @Setter
     private TourModel selectedTour;
 
+    private IPDFService pdfService;
+
+    private TourDAO tourDAO;
+
     private MainController mainController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainController = MainController.getInstance();
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
-        // this.webView.disableProperty().bindBidirectional(tour);
-    }
-
-    private double[] getCoordinates(String address) {
-        if (address.equals("Vienna")) {
-            return new double[]{48.210033, 16.363449};
-        } else if (address.equals("Graz")) {
-            return new double[]{47.070713, 15.439504};
-        } else {
-            throw new IllegalArgumentException("Address not recognized");
-        }
-    }
-
-    private String generateLeafletMap(TourModel tour) {
-        /*
-        if (selectedTour == null) {
-            return "<html><body><h1>No tour selected</h1></body></html>";
-        }
-        try {
-//            double startLat = Double.parseDouble(selectedTour.getFromProperty().get().split(",")[0]);
-//            double startLng = Double.parseDouble(selectedTour.getFromProperty().get().split(",")[1]);
-//            double endLat = Double.parseDouble(selectedTour.getToProperty().get().split(",")[0]);
-//            double endLng = Double.parseDouble(selectedTour.getToProperty().get().split(",")[1]);
-//            String routeJson = OpenRouteService.getRoute(startLat, startLng, endLat, endLng);
-
-            double[] fromCoords = getCoordinates(tour.getFromProperty().getValue());
-            double[] toCoords = getCoordinates(tour.getToProperty().getValue());
-
-            // Route von OpenRouteService abrufen
-            String routeJson = OpenRouteService.getRoute(fromCoords[0], fromCoords[1], toCoords[0], toCoords[1]);
-
-            return "<!DOCTYPE html>\n" +
-                    "<html lang=\"en\">\n" +
-                    "<head>\n" +
-                    "    <meta charset=\"UTF-8\">\n" +
-                    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                    "    <title>Leaflet Map with OpenRouteService</title>\n" +
-                    "    <link rel=\"stylesheet\" href=\"https://unpkg.com/leaflet/dist/leaflet.css\" />\n" +
-                    "</head>\n" +
-                    "<body>\n" +
-                    "    <div id=\"map\" style=\"width: 100%; height: 100%;\"></div>\n" +
-                    "    <script src=\"https://unpkg.com/leaflet/dist/leaflet.js\"></script>\n" +
-                    "    <script>\n" +
-                    "        const map = L.map('map').setView([48.210033, 16.363449], 13);\n" +
-                    "        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n" +
-                    "            maxZoom: 19,\n" +
-                    "        }).addTo(map);\n" +
-                    "        const routeData = " + routeJson + ";\n" +
-                    "        const coordinates = routeData.features[0].geometry.coordinates;\n" +
-                    "        const latlngs = coordinates.map(coord => [coord[1], coord[0]]);\n" +
-                    "        L.polyline(latlngs, { color: 'blue' }).addTo(map);\n" +
-                    "    </script>\n" +
-                    "</body>\n" +
-                    "</html>";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "<html><body><p>Error loading map</p></body></html>";
-        }
-
-         */
-        return "";
+        this.pdfService = DefaultInjector.getService(PDFService.class);
+        this.tourDAO = DefaultInjector.getService(TourDAO.class);
     }
 
     @FXML
@@ -198,5 +149,43 @@ public class TourInfoController implements Initializable, Injectable {
             tourMap.setImage(null);
         }
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
+    }
+
+    @FXML
+    public void generatePDF(ActionEvent actionEvent) {
+        try{
+            pdfService.createUserListPDF("TourList.pdf", selectedTour);
+            System.out.println("PDF generated successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void handleExportButton(ActionEvent event) {
+        File file = new File("exported_tour.csv");
+
+        try {
+            exportTourToCsv(selectedTour, file);
+            System.out.println("Tour erfolgreich exportiert nach " + file.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    public void exportTourToCsv(TourModel selectedTour, File file) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+            if (selectedTour != null) {
+                writer.println(selectedTour.getName() + "," + selectedTour.getTourDescription() + ","
+                        + selectedTour.getFrom() + "," + selectedTour.getTo() + ","
+                        + selectedTour.getTransportType() + "," + selectedTour.getDistance() + ","
+                        + selectedTour.getTime() + "," + selectedTour.getRouteInformation());
+            }
+        } catch (IOException e) {
+            throw e;
+        }
     }
 }

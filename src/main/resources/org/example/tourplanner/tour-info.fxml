@@ -35,6 +35,9 @@
             <ImageView fx:id="tourMap" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
          </HBox>
          <Button fx:id="addLogBnt" mnemonicParsing="false" onAction="#createLog" text="Add Log" />
+         <Button fx:id="generatePDFButton" text="Tour Report" onAction="#generatePDF"/>
+         <Button fx:id="exportTour" text="Export Tour" onAction="#handleExportButton"/>
+
       </children>
     </VBox>
 

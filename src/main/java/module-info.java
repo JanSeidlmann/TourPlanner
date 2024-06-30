@@ -9,6 +9,9 @@ module org.example.tourplanner {
     requires javafx.web;
     requires org.json;
     requires java.desktop;
+    requires kernel;
+    requires layout;
+    requires io;
 
     opens org.example.tourplanner to javafx.fxml;
     exports org.example.tourplanner;

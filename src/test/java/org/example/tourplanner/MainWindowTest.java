@@ -54,13 +54,13 @@ public class MainWindowTest extends ApplicationTest {
     @Test
     void testTourModelProperties() {
         TourModel tour = new TourModel("TourName", "Description", "From", "To", "TransportType", 10.5f, "Time", "RouteInformation");
-        assertEquals("TourName", tour.getName().get());
-        assertEquals("Description", tour.getTourDescription().get());
-        assertEquals("From", tour.getFrom().get());
-        assertEquals("To", tour.getTo().get());
-        assertEquals("TransportType", tour.getTransportType().get());
-        assertEquals(10.5f, tour.getDistance().get());
-        assertEquals("Time", tour.getTime().get());
-        assertEquals("RouteInformation", tour.getRouteInformation().get());
+        assertEquals("TourName", tour.getNameProperty().get());
+        assertEquals("Description", tour.getTourDescriptionProperty().get());
+        assertEquals("From", tour.getFromProperty().get());
+        assertEquals("To", tour.getToProperty().get());
+        assertEquals("TransportType", tour.getTransportTypeProperty().get());
+        assertEquals(10.5f, tour.getDistanceProperty().get());
+        assertEquals("Time", tour.getTimeProperty().get());
+        assertEquals("RouteInformation", tour.getRouteInformationProperty().get());
     }
 }
