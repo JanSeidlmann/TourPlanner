@@ -6,9 +6,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane maxWidth="2000.0" minHeight="50.0" minWidth="600.0" prefHeight="80.0" prefWidth="2000.0" styleClass="anchor-pane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.PL.controller.NavbarController">
-   <stylesheets>
-      <URL value="@css/navbar.css" />
-   </stylesheets>
+
       <HBox prefHeight="80.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TextField fx:id="searchField" promptText="Search">
@@ -16,14 +14,6 @@
                   <Insets top="3.0" />
                </HBox.margin></TextField>
             <Button fx:id="searchButton" mnemonicParsing="false" text="Search">
-               <HBox.margin>
-                  <Insets left="2.0" />
-               </HBox.margin></Button>
-            <Button mnemonicParsing="false" text="Tours/Logs">
-               <HBox.margin>
-                  <Insets left="2.0" />
-               </HBox.margin></Button>
-            <Button mnemonicParsing="false" text="Menu">
                <HBox.margin>
                   <Insets left="2.0" />
                </HBox.margin></Button>

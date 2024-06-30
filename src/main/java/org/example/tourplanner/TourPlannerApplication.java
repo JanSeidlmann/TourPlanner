@@ -14,7 +14,11 @@ import java.io.IOException;
 public class TourPlannerApplication extends Application {
     private static final File LEAFLET_HTML = new File(System.getProperty("user.dir"), "/src/main/resources/org/example/tourplanner/maps/leaflet.html");
 
+    private static final String DARK_MODE_CSS = "/theme.css";
+
     private static HostServices hostService;
+
+    private static Scene mainScene;
 
     @Override
     public void init() throws Exception {
@@ -27,10 +31,12 @@ public class TourPlannerApplication extends Application {
         AnchorPane root = loader.load();
         MainController mainController = loader.getController();
 
-        Scene scene = new Scene(root, 900, 600);
-        mainStage.setScene(scene);
+        mainScene = new Scene(root, 900, 600);
+        mainStage.setScene(mainScene);
         mainStage.setTitle("Tour Planner by Jan and Laura");
         mainStage.show();
+
+        enableDarkMode(false);
     }
 
     public static void main(String[] args) {
@@ -41,5 +47,13 @@ public class TourPlannerApplication extends Application {
         hostService.showDocument(LEAFLET_HTML.toURI().toString());
     }
 
-
+    public static void enableDarkMode(boolean enable) {
+        if (enable) {
+            if (!mainScene.getStylesheets().contains(DARK_MODE_CSS)) {
+                mainScene.getStylesheets().add(DARK_MODE_CSS);
+            }
+        } else {
+            mainScene.getStylesheets().remove(DARK_MODE_CSS);
+        }
+    }
 }
