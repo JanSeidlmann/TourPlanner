@@ -1,5 +1,6 @@
 package org.example.tourplanner.DAL.repositories;
 import lombok.extern.slf4j.Slf4j;
+import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.BL.models.TourModel;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -32,6 +33,11 @@ public class TourDAO extends BaseDAO<TourModel> {
     @Override
     public void save(TourModel tour){
         super.save(tour);
+    }
+
+    @Override
+    public void update(TourModel tour) {
+        super.update(tour);
     }
 
     @Override

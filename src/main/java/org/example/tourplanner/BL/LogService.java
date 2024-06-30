@@ -31,6 +31,11 @@ public class LogService implements ILogService, Injectable {
     }
 
     @Override
+    public void editLog(LogModel log) {
+        logDAO.update(log);
+    }
+
+    @Override
     public void deleteLog(LogModel log) {
         logDAO.delete(log);
     }

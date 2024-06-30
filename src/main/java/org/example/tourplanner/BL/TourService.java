@@ -25,6 +25,11 @@ public class TourService implements ITourService, Injectable {
     }
 
     @Override
+    public void editTour(TourModel tour) {
+        tourDAO.update(tour);
+    }
+
+    @Override
     public void deleteTour(TourModel tourModel){
         tourDAO.delete(tourModel);
     }

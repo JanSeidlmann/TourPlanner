@@ -27,6 +27,20 @@ public abstract class BaseDAO<T> implements Injectable {
         }
     }
 
+    protected void update(T entity) {
+        Transaction transaction = null;
+        try (Session session = getSession()) {
+            transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            log.error("Unable to update entity of Type " + entity.getClass() + ", an exception occurred: " + e);
+        }
+    }
+
     protected void delete(T entity){
         Transaction transaction = null;
         try (Session session = getSession()) {

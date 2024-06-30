@@ -36,6 +36,11 @@ public class LogDAO extends BaseDAO<LogModel> {
     }
 
     @Override
+    public void update(LogModel log) {
+        super.update(log);
+    }
+
+    @Override
     public void delete(LogModel log){
         super.delete(log);
     }
