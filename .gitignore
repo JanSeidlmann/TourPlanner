@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 src/main/java/org/example/tourplanner/config/ApplicationContext.java
+logs
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
