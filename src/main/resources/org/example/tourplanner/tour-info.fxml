@@ -10,9 +10,6 @@
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane prefHeight="1400.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tourplanner.PL.controller.TourInfoController">
-   <stylesheets>
-      <URL value="@css/tour-info.css" />
-   </stylesheets>
     <VBox prefHeight="1400.0" prefWidth="1800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
          <HBox prefHeight="100.0" prefWidth="200.0">
@@ -23,7 +20,7 @@
             </children>
          </HBox>
          <HBox prefHeight="1400.0" prefWidth="200.0" styleClass="table-view">
-            <VBox prefHeight="200.0" prefWidth="1000.0" styleClass="table-view" stylesheets="@css/tour-info.css">
+            <VBox prefHeight="200.0" prefWidth="1000.0" styleClass="table-view">
                <Label fx:id="nameField" layoutX="14.0" layoutY="14.0" />
                <Label fx:id="tourDescriptionField" layoutX="14.0" layoutY="44.0" />
                <Label fx:id="fromField" layoutX="14.0" layoutY="74.0" />
