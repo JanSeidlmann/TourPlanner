@@ -7,17 +7,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
 import org.example.tourplanner.BL.models.TourModel;
 import org.example.tourplanner.Injectable;
-import org.example.tourplanner.OpenRouteService;
+import org.example.tourplanner.util.OpenRouteService;
 import org.example.tourplanner.TourPlannerApplication;
+import org.example.tourplanner.util.MapGenerator;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,10 +45,6 @@ public class TourInfoController implements Initializable, Injectable {
     private Label routeInformationField = new Label();
     @FXML
     private ImageView tourMap;
-    @FXML
-    private WebView webView;
-
-    private WebEngine webEngine;
 
     @Setter
     private TourModel selectedTour;
@@ -58,8 +55,7 @@ public class TourInfoController implements Initializable, Injectable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainController = MainController.getInstance();
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
-        // this.webView.disableProperty().bindBidirectional(tou);
-        webEngine = webView.getEngine();
+        // this.webView.disableProperty().bindBidirectional(tour);
     }
 
     private double[] getCoordinates(String address) {
@@ -73,6 +69,7 @@ public class TourInfoController implements Initializable, Injectable {
     }
 
     private String generateLeafletMap(TourModel tour) {
+        /*
         if (selectedTour == null) {
             return "<html><body><h1>No tour selected</h1></body></html>";
         }
@@ -116,6 +113,9 @@ public class TourInfoController implements Initializable, Injectable {
             e.printStackTrace();
             return "<html><body><p>Error loading map</p></body></html>";
         }
+
+         */
+        return "";
     }
 
     @FXML
@@ -168,12 +168,24 @@ public class TourInfoController implements Initializable, Injectable {
             transportTypeField.setText("TransportType: " + tour.getTransportTypeProperty().getValue());
             distanceField.setText("Distance: " + tour.getDistanceProperty().getValue());
             timeField.setText("Time: " + tour.getTimeProperty().getValue());
-            routeInformationField.setText("Route information: see map");
 
-            // Initialize map with tour info
-            if (webEngine != null) {
-                String leafletMap = generateLeafletMap(tour);
-                webEngine.loadContent(leafletMap, "text/html");
+            // with help from team5 - https://github.com/helhar1234/TourPlanner_SWEN2_Team5
+            try {
+                String mapDir = System.getProperty("user.dir") + "/src/main/resources/org/example/tourplanner/maps";
+                String filename = "map_" + tour.getId();
+                File mapFile = new File(mapDir, filename);
+
+                if (!mapFile.exists()) {
+                    filename = MapGenerator.getMapImage(tour);
+                    mapFile = new File(mapDir, filename);
+                }
+
+                Image mapImage = new Image(mapFile.toURI().toString());
+                tourMap.setPreserveRatio(true);
+                tourMap.setImage(mapImage);
+                tourMap.setOnMouseClicked(event -> MapGenerator.openTourMapInBrowser(tour));
+            } catch (IOException e) {
+                // log error
             }
         } else {
             nameField.setText("");
@@ -183,12 +195,7 @@ public class TourInfoController implements Initializable, Injectable {
             transportTypeField.setText("");
             distanceField.setText("");
             timeField.setText("");
-            routeInformationField.setText("");
             tourMap.setImage(null);
-
-            if (webEngine != null) {
-                webEngine.loadContent("<html><body><h1>No tour selected</h1></body></html>", "text/html");
-            }
         }
         selectedTourName.setText("Selected tour: " + mainController.getSelectedTourName());
     }

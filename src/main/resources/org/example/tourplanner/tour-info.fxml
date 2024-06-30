@@ -31,10 +31,8 @@
                <Label fx:id="transportTypeField" layoutX="14.0" layoutY="134.0" />
                <Label fx:id="distanceField" layoutX="14.0" layoutY="164.0" />
                <Label fx:id="timeField" layoutX="14.0" layoutY="194.0" />
-               <Label fx:id="routeInformationField" layoutX="14.0" layoutY="224.0" />
             </VBox>
             <ImageView fx:id="tourMap" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
-            <WebView fx:id="webView" prefHeight="200.0" prefWidth="200.0" />
          </HBox>
          <Button fx:id="addLogBnt" mnemonicParsing="false" onAction="#createLog" text="Add Log" />
       </children>

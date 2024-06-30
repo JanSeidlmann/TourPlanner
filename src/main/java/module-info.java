@@ -7,6 +7,8 @@ module org.example.tourplanner {
     requires java.persistence;
     requires java.naming;
     requires javafx.web;
+    requires org.json;
+    requires java.desktop;
 
     opens org.example.tourplanner to javafx.fxml;
     exports org.example.tourplanner;
@@ -22,5 +24,7 @@ module org.example.tourplanner {
     opens org.example.tourplanner.BL to javafx.base, javafx.fxml, org.hibernate.orm.core;
     exports org.example.tourplanner.PL.viewmodels;
     opens org.example.tourplanner.PL.viewmodels to javafx.fxml;
+    exports org.example.tourplanner.util;
+    opens org.example.tourplanner.util to javafx.fxml;
 
 }
