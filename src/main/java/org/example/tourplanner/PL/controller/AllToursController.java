@@ -58,8 +58,6 @@ public class AllToursController implements Initializable, Injectable {
     @FXML
     private Button searchButton;
 
-    private ITourService tourService;
-
     private TourDAO tourDAO;
 
     private final ObservableList<TourModel> tourList = FXCollections.observableArrayList();
@@ -69,7 +67,6 @@ public class AllToursController implements Initializable, Injectable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.tourService = DefaultInjector.getService(TourService.class);
         this.tourDAO = DefaultInjector.getService(TourDAO.class);
         mainController = MainController.getInstance();
 
@@ -82,7 +79,7 @@ public class AllToursController implements Initializable, Injectable {
         timeColumn.setCellValueFactory(data -> data.getValue().getTimeProperty());
         routeInformationColumn.setCellValueFactory(data -> data.getValue().getRouteInformationProperty());
 
-        List<TourModel> existingTours = this.tourService.getAllTours();
+        List<TourModel> existingTours = mainController.getTours();
         tourList.addAll(existingTours);
         tourTableView.setItems(tourList);
         tourTableView.setOnMouseClicked(this::handleRowClick);
@@ -102,9 +99,8 @@ public class AllToursController implements Initializable, Injectable {
 
     // Methode zum Aktualisieren der Tourliste
     public void updateTourList() {
-        // Reload tours after window is closed
         tourList.clear();
-        tourList.addAll(tourService.getAllTours());
+        tourList.addAll(mainController.getTours());
         tourTableView.setItems(tourList);
     }
 

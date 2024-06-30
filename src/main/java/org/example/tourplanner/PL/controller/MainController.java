@@ -10,6 +10,10 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.example.tourplanner.BL.ILogService;
+import org.example.tourplanner.BL.ITourService;
+import org.example.tourplanner.BL.LogService;
+import org.example.tourplanner.BL.TourService;
 import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.BL.models.TourModel;
 import org.example.tourplanner.DAL.repositories.TourDAO;
@@ -45,17 +49,15 @@ public class MainController implements Initializable, Injectable {
     private LogController logController;
 
     private static MainController instance;
-    private final TourDAO tourDAO = new TourDAO();
-    private final LogDAO logDAO = new LogDAO();
 
-    private final List<TourModel> initialTours = tourDAO.findAll();
-    private final ObservableList<TourModel> tours = FXCollections.observableArrayList(initialTours);
+    private ITourService tourService;
+    private ILogService logService;
+
+    private ObservableList<TourModel> tours = FXCollections.observableArrayList();;
+    private ObservableList<LogModel> logs = FXCollections.observableArrayList();;
     private final ObservableList<String> tourNames = FXCollections.observableArrayList();
-    private final List<LogModel> initialLogs = logDAO.findALl();
-    private ObservableList<LogModel> logs = FXCollections.observableArrayList(initialLogs);
 
     private TourModel selectedTour;
-    private LogModel selectedLog;
     private final CreateTourViewModel createTourViewModel;
     private final CreateLogViewModel createLogViewModel;
 
@@ -70,12 +72,19 @@ public class MainController implements Initializable, Injectable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        tourService = DefaultInjector.getService(TourService.class);
+        logService = DefaultInjector.getService(LogService.class);
+
+        this.tours = FXCollections.observableArrayList(tourService.getAllTours());
+        this.logs = FXCollections.observableArrayList(logService.getAllLogs());
+
         if (allToursController != null) {
             allToursController.setMainController(this);
         }
         if (logController != null) {
             logController.setMainController(this);
         }
+        loadAllToursView();
         loadTourInfoView();
         loadLogView();
     }
@@ -86,6 +95,17 @@ public class MainController implements Initializable, Injectable {
             instance = DefaultInjector.getService(MainController.class);
         }
         return instance;
+    }
+
+    private void loadAllToursView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/tourplanner/all-tours.fxml"));
+            AnchorPane allToursContent = loader.load();
+            allToursTab.setContent(allToursContent);
+            allToursController = loader.getController();
+        } catch (IOException e) {
+            log.error("An error occurred while loading AllToursView, error: " + e);
+        }
     }
 
     private void loadTourInfoView() {
@@ -126,7 +146,7 @@ public class MainController implements Initializable, Injectable {
         if (tourInfoController != null) {
             tourInfoController.setSelectedTour(selectedTour);
             tourInfoController.setTourInfo(selectedTour);
-            this.logs = FXCollections.observableArrayList(logDAO.findByTour(selectedTour));
+            this.logs = FXCollections.observableArrayList(logService.getLogs(selectedTour));
             logController.setLogsOfTour();
             tabPane.getSelectionModel().select(tourInfoTab);
         } else {
@@ -136,6 +156,7 @@ public class MainController implements Initializable, Injectable {
 
     public void switchToLogsTab() {
         if (logController != null) {
+            this.logs = FXCollections.observableArrayList(logService.getLogs(selectedTour));
             logController.setLogsOfTour();
             tabPane.getSelectionModel().select(logsTab);
         } else {
@@ -163,12 +184,13 @@ public class MainController implements Initializable, Injectable {
     }
 
     public void removeTour(TourModel tour) {
-        tours.remove(tour);
+        createTourViewModel.deleteTour(tour);
+        this.tours = FXCollections.observableArrayList(tourService.getAllTours());
+        allToursController.updateTourList();
         tourNames.remove(tour.getName().toString());
         selectedTour = null;
         tourInfoController.setTourInfo(null);
         logController.setLogsOfTour();
-        createTourViewModel.deleteTour(tour);
     }
 
     public String getSelectedTourName() {
@@ -181,8 +203,9 @@ public class MainController implements Initializable, Injectable {
     }
 
     public void removeLog(LogModel log) {
-        logController.setLogsOfTour();
         createLogViewModel.deleteLog(log);
+        this.logs = FXCollections.observableArrayList(logService.getLogs(selectedTour));
+        logController.setLogsOfTour();
     }
 
 }
