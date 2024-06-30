@@ -58,7 +58,7 @@ public class AllToursController implements Initializable, Injectable {
     @FXML
     private Button searchButton;
 
-    private TourDAO tourDAO;
+    private ITourService tourService;
 
     private final ObservableList<TourModel> tourList = FXCollections.observableArrayList();
 
@@ -67,7 +67,7 @@ public class AllToursController implements Initializable, Injectable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.tourDAO = DefaultInjector.getService(TourDAO.class);
+        tourService = DefaultInjector.getService(TourService.class);
         mainController = MainController.getInstance();
 
         nameColumn.setCellValueFactory(data -> data.getValue().getNameProperty());
@@ -131,7 +131,7 @@ public class AllToursController implements Initializable, Injectable {
         if (selectedFile != null) {
             try {
                 importTourFromCsv(selectedFile);
-                System.out.println("Tour erfolgreich importiert aus " + selectedFile.getAbsolutePath());
+                log.info("Successful import of tour from " + selectedFile.getAbsolutePath());
             } catch (IOException e) {
                 log.error("Error importing tour from CSV file");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -165,7 +165,7 @@ public class AllToursController implements Initializable, Injectable {
 
                 currentTour = new TourModel(name, description, from, to, transportType, distance, time, routeInformation);
                 tourList.add(currentTour);
-                tourDAO.save(currentTour);
+                tourService.addTour(currentTour);
             }
 
             tourTableView.setItems(tourList);

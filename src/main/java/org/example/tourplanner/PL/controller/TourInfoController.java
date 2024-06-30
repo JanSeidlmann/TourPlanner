@@ -16,10 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.tourplanner.BL.IPDFService;
 import org.example.tourplanner.BL.PDFService;
 import org.example.tourplanner.BL.models.TourModel;
-import org.example.tourplanner.DAL.repositories.TourDAO;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
-import org.example.tourplanner.util.OpenRouteService;
 import org.example.tourplanner.TourPlannerApplication;
 import org.example.tourplanner.util.MapGenerator;
 

@@ -16,8 +16,6 @@ import org.example.tourplanner.BL.LogService;
 import org.example.tourplanner.BL.TourService;
 import org.example.tourplanner.BL.models.LogModel;
 import org.example.tourplanner.BL.models.TourModel;
-import org.example.tourplanner.DAL.repositories.TourDAO;
-import org.example.tourplanner.DAL.repositories.LogDAO;
 import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
 import org.example.tourplanner.PL.viewmodels.CreateLogViewModel;
