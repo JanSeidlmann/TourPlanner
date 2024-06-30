@@ -8,7 +8,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.example.tourplanner.BL.ITourService;
+import org.example.tourplanner.BL.TourService;
 import org.example.tourplanner.BL.models.TourModel;
+import org.example.tourplanner.DefaultInjector;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,12 +47,13 @@ public class EditTourController implements Initializable {
     private ChoiceBox<String> editTransportType;
 
     private MainController viewModel;
-
+    private ITourService tourService;
     private TourModel tourModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         viewModel = MainController.getInstance();
+        tourService = DefaultInjector.getService(TourService.class);
         editTransportType.getItems().setAll("Car", "Bike", "Walk");
     }
 
@@ -104,6 +108,8 @@ public class EditTourController implements Initializable {
             tourModel.getDistanceProperty().set(distance);
             tourModel.getTransportTypeProperty().set(transportType);
             tourModel.getRouteInformationProperty().set(routeInformation);
+
+            tourService.editTour(tourModel);
 
             viewModel.getTourNames().remove(oldName);
             viewModel.getTourNames().add(editNameTextField.getText());

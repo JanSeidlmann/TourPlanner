@@ -8,7 +8,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.example.tourplanner.BL.ILogService;
+import org.example.tourplanner.BL.LogService;
+import org.example.tourplanner.BL.TourService;
 import org.example.tourplanner.BL.models.LogModel;
+import org.example.tourplanner.DefaultInjector;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,12 +41,12 @@ public class EditLogController implements Initializable {
     @FXML
     private ChoiceBox<Integer> editRatingChoiceBox;
 
-    private MainController viewModel;
+    private ILogService logService;
     private LogModel logModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewModel = MainController.getInstance();
+        logService = DefaultInjector.getService(LogService.class);
         editRatingChoiceBox.getItems().setAll(1, 2, 3, 4, 5);
     }
 
@@ -98,6 +102,8 @@ public class EditLogController implements Initializable {
             logModel.getTotalDistanceProperty().set(totalDistance);
             logModel.getTotalTimeProperty().set(totalTime);
             logModel.getRatingProperty().set(rating);
+
+            logService.editLog(logModel);
 
             closeStage();
         }
