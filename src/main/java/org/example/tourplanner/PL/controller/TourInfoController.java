@@ -36,21 +36,21 @@ public class TourInfoController implements Initializable, Injectable {
     @FXML
     public Label selectedTourName;
     @FXML
-    private Label nameField = new Label();
+    private Label nameField;
     @FXML
-    private Label tourDescriptionField = new Label();
+    private Label tourDescriptionField;
     @FXML
-    private Label fromField = new Label();
+    private Label fromField;
     @FXML
-    private Label toField = new Label();
+    private Label toField;
     @FXML
-    private Label transportTypeField = new Label();
+    private Label transportTypeField;
     @FXML
-    private Label distanceField = new Label();
+    private Label distanceField;
     @FXML
-    private Label timeField = new Label();
+    private Label timeField;
     @FXML
-    private Label routeInformationField = new Label();
+    private Label routeInformationField;
     @FXML
     private ImageView tourMap;
 

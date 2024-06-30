@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +19,7 @@ import org.example.tourplanner.DefaultInjector;
 import org.example.tourplanner.Injectable;
 import org.example.tourplanner.PL.viewmodels.CreateLogViewModel;
 import org.example.tourplanner.PL.viewmodels.CreateTourViewModel;
+import org.example.tourplanner.TourPlannerApplication;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +45,10 @@ public class MainController implements Initializable, Injectable {
     private TourInfoController tourInfoController;
     @FXML
     private LogController logController;
+    @FXML
+    private Button darkModeButton;
+
+    private boolean isDarkMode = false;
 
     private static MainController instance;
     private final TourDAO tourDAO = new TourDAO();
@@ -55,7 +61,6 @@ public class MainController implements Initializable, Injectable {
     private ObservableList<LogModel> logs = FXCollections.observableArrayList(initialLogs);
 
     private TourModel selectedTour;
-    private LogModel selectedLog;
     private final CreateTourViewModel createTourViewModel;
     private final CreateLogViewModel createLogViewModel;
 
@@ -78,6 +83,8 @@ public class MainController implements Initializable, Injectable {
         }
         loadTourInfoView();
         loadLogView();
+
+        darkModeButton.setOnAction(event -> darkMode());
     }
 
     // Öffentliche Methode zur Abfrage der Singleton-Instanz
@@ -185,4 +192,13 @@ public class MainController implements Initializable, Injectable {
         createLogViewModel.deleteLog(log);
     }
 
+    private void darkMode() {
+        isDarkMode = !isDarkMode;
+        if (isDarkMode) {
+            darkModeButton.setText("Light Mode");
+        } else {
+            darkModeButton.setText("Dark Mode");
+        }
+        TourPlannerApplication.enableDarkMode(isDarkMode);
+    }
 }

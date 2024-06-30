@@ -3,6 +3,7 @@ package org.example.tourplanner;
 import javafx.stage.Stage;
 import org.example.tourplanner.BL.models.TourModel;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
@@ -12,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isEnabled;
+import static org.testfx.matcher.base.NodeMatchers.isNotNull;
+import static org.testfx.util.NodeQueryUtils.hasText;
 import static org.testfx.util.NodeQueryUtils.isVisible;
 
 public class MainWindowTest extends ApplicationTest {
@@ -31,12 +34,12 @@ public class MainWindowTest extends ApplicationTest {
     }
 
     @Test
-    void testLoginButtonEnabled() {
+    void testAddButtonEnabled() {
         verifyThat("#addTourButton", isEnabled());
     }
 
     @Test
-    void testLoginWithValidCredentials() {
+    void testButtonVisible() {
         clickOn("#addTourButton");
 
         verifyThat("#createButton", isVisible());
@@ -44,8 +47,8 @@ public class MainWindowTest extends ApplicationTest {
     }
 
     @Test
-    void testLogoutButtonLogsOutUser() {
-        testLoginWithValidCredentials();
+    void testCancelButton() {
+        testButtonVisible();
 
         clickOn("#cancelButton");
         verifyThat("#addTourButton", isVisible());
@@ -62,5 +65,21 @@ public class MainWindowTest extends ApplicationTest {
         assertEquals(10.5f, tour.getDistanceProperty().get());
         assertEquals("Time", tour.getTimeProperty().get());
         assertEquals("RouteInformation", tour.getRouteInformationProperty().get());
+    }
+
+    @Test
+    void testCreateTour() {
+        testButtonVisible();
+
+        clickOn("#nameTextField").write("Name");
+        clickOn("#descriptionTextField").write("Description");
+        clickOn("#routeInformationTextField").write("RouteInformation");
+        clickOn("#timeTextField").write("Time");
+        clickOn("#distanceTextField").write("12345");
+        clickOn("#toTextField").write("To");
+        clickOn("#fromTextField").write("From");
+        clickOn("#createButton");
+
+        verifyThat("#tourTableView", isNotNull());
     }
 }
