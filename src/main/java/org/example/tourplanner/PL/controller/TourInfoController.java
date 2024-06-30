@@ -127,6 +127,10 @@ public class TourInfoController implements Initializable, Injectable {
                 if (!mapFile.exists()) {
                     filename = MapGenerator.getMapImage(tour);
                     mapFile = new File(mapDir, filename);
+
+                    if (!mapFile.exists()) {
+                        mapFile = new File(System.getProperty("user.dir") + "/src/main/resources/org/example/tourplanner/img/map-placeholder.png");
+                    }
                 }
 
                 Image mapImage = new Image(mapFile.toURI().toString());
@@ -135,6 +139,10 @@ public class TourInfoController implements Initializable, Injectable {
                 tourMap.setOnMouseClicked(event -> MapGenerator.openTourMapInBrowser(tour));
             } catch (IOException e) {
                 log.error("An error occurred while setting the tourMap, error: " + e);
+                File mapFile = new File(System.getProperty("user.dir") + "/src/main/resources/org/example/tourplanner/img/map-placeholder.png");
+                Image mapImage = new Image(mapFile.toURI().toString());
+                tourMap.setPreserveRatio(true);
+                tourMap.setImage(mapImage);
             }
         } else {
             nameField.setText("");
